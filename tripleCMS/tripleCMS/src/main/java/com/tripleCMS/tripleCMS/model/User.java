@@ -34,7 +34,6 @@ public class User{
     private String userId;
 
     // 회원 패스워드
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false, length = 100)
     private String userPw;
 
@@ -42,9 +41,27 @@ public class User{
     @ColumnDefault("0")
     private int point;
 
+    // 회원레벨
+    @ColumnDefault("0")
+    private int userLevel;
+
     // 회원 가입일
     @CreationTimestamp
     private Timestamp userEnrollDate;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Enumerated(EnumType.STRING)
+    private List<Role> roles = new ArrayList<>();
+
+    private String refreshToken;
+
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
+
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    @Builder.Default

@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 import java.util.Date;
+import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<User, Object> {
-    Optional<User> findByUserIdAndUserPw(String userId, String UserPw);
+public interface UserRepository extends JpaRepository<User, UUID> {
+    Optional<User> findByUserId(String userId);
+    Optional<User> findByUserUUID(UUID userUUID);
 }

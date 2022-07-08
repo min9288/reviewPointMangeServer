@@ -11,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -52,4 +53,7 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "placeUUID")
     private Place place;
+
+    @OneToMany(mappedBy = "review", fetch = FetchType.EAGER)
+    private List<Attphoto> attphotos;
 }

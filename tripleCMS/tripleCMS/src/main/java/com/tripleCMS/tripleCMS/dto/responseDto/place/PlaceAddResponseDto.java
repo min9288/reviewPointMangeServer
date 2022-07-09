@@ -8,13 +8,13 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-public class PlaceResponseDto {
-    private UUID placeUUid;
+public class PlaceAddResponseDto {
+    private UUID placeUUID;
     private String placeName;
 
     @Builder
-    public PlaceResponseDto(UUID placeUUid, String placeName) {
-        this.placeUUid = placeUUid;
+    public PlaceAddResponseDto(UUID placeUUID, String placeName) {
+        this.placeUUID = placeUUID;
         this.placeName = placeName;
     }
 }

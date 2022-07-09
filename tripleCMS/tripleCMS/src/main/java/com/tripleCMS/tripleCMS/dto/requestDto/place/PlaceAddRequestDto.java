@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlaceRequestDto {
+public class PlaceAddRequestDto {
     private String placeName;
 }

@@ -4,6 +4,7 @@ import com.tripleCMS.tripleCMS.exception.*;
 import com.tripleCMS.tripleCMS.service.ResponseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -44,6 +45,13 @@ public class ExceptionAdvice {
     public Result userNotFoundException() {
         return responseService.getFailureResult(-105, "유저 정보를 찾을 수 없습니다.");
     }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result customAccessDeniedHandler() {
+        return responseService.getFailureResult(-106, "인증 정보를 확인할 수 없습니다.");
+    }
+
 
 
 }

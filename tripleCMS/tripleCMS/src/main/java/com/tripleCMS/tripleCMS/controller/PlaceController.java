@@ -24,7 +24,7 @@ public class PlaceController {
         return responseService.getSingleResult(responseDto);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public MultipleResult<PlaceFindAllResponseDto> findAllPlace() {
         return responseService.getMultipleResult(placeService.findAllPlace());
     }

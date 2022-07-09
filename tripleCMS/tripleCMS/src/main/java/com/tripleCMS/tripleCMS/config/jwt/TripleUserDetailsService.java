@@ -37,21 +37,4 @@ public class TripleUserDetailsService implements UserDetailsService {
                 .build();
     }
 
-//    @Override
-//    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-//        User user = userRepository.findByUserId(userId).orElseThrow(() -> new UsernameNotFoundException("not found loginId : " + userId));
-//
-//        Collection<? extends GrantedAuthority> authorities = getAuthorities();
-//        user.setAuthorities(authorities);
-//
-//        return user;
-//    }
-
-//    private Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
-//        grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
-//
-//        return grantedAuthorityList;
-//    }
-
 }

@@ -8,12 +8,10 @@ import com.tripleCMS.tripleCMS.model.enumPackage.Event;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.sql.Timestamp;
 import java.util.List;
-import java.util.UUID;
 
 
-public class ReviewRequestDto {
+public class ReviewAddRequestDto {
 
     @Data
     @AllArgsConstructor

@@ -1,5 +1,6 @@
-package com.tripleCMS.tripleCMS.config;
+package com.tripleCMS.tripleCMS.config.jwt;
 
+import com.tripleCMS.tripleCMS.model.User;
 import com.tripleCMS.tripleCMS.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -31,6 +32,8 @@ public class JwtTokenProvider {
     private long refreshTokenValidTime = 1000L * 60 * 60 * 24 * 7;
 
     private final UserDetailsService userDetailsService;
+    private final TripleUserDetailsService tripleUserDetailsService;
+
     private UserRepository userRepository;
 
     @PostConstruct
@@ -62,8 +65,9 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(getUserId(token));
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+//        UserDetails userDetails = userDetailsService.loadUserByUsername(getUserId(token));
+        TripleUserDetails tripleUserDetails = (TripleUserDetails) tripleUserDetailsService.loadUserByUsername(getUserId(token));
+        return new UsernamePasswordAuthenticationToken(tripleUserDetails, "", tripleUserDetails.getAuthorities());
     }
 
     public String getUserId(String token) {

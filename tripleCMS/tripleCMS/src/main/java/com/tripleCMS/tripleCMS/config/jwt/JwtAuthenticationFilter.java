@@ -1,4 +1,4 @@
-package com.tripleCMS.tripleCMS.config;
+package com.tripleCMS.tripleCMS.config.jwt;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

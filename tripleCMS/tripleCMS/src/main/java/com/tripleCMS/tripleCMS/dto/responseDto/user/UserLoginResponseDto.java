@@ -1,4 +1,4 @@
-package com.tripleCMS.tripleCMS.dto;
+package com.tripleCMS.tripleCMS.dto.responseDto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

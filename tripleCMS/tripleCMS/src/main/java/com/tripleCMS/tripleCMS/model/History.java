@@ -1,9 +1,7 @@
 package com.tripleCMS.tripleCMS.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -16,6 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "history")
 public class History {
 
@@ -37,6 +36,7 @@ public class History {
 
     // 이벤트 발생일시
     @CreationTimestamp
+    @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private Timestamp eventEnrollDate;
 
     // user 테이블 참조

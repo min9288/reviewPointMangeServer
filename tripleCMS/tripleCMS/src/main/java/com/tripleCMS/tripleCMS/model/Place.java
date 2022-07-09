@@ -1,9 +1,6 @@
 package com.tripleCMS.tripleCMS.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,6 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "place")
 public class Place {
 
@@ -31,4 +29,5 @@ public class Place {
     // 장소에 작성된 리뷰 수
     @ColumnDefault("0")
     private int placeReviewCount;
+
 }

@@ -1,7 +1,12 @@
 package com.tripleCMS.tripleCMS.service;
 
-import com.tripleCMS.tripleCMS.config.JwtTokenProvider;
-import com.tripleCMS.tripleCMS.dto.*;
+import com.tripleCMS.tripleCMS.config.jwt.JwtTokenProvider;
+import com.tripleCMS.tripleCMS.dto.requestDto.jwt.TokenRequestDto;
+import com.tripleCMS.tripleCMS.dto.requestDto.user.UserLoginRequestDto;
+import com.tripleCMS.tripleCMS.dto.requestDto.user.UserRegisterRequestDto;
+import com.tripleCMS.tripleCMS.dto.responseDto.jwt.TokenResponseDto;
+import com.tripleCMS.tripleCMS.dto.responseDto.user.UserLoginResponseDto;
+import com.tripleCMS.tripleCMS.dto.responseDto.user.UserRegisterResponseDto;
 import com.tripleCMS.tripleCMS.exception.InvalidRefreshTokenException;
 import com.tripleCMS.tripleCMS.exception.LoginFailureException;
 import com.tripleCMS.tripleCMS.exception.UserIdAlreadyExistsException;

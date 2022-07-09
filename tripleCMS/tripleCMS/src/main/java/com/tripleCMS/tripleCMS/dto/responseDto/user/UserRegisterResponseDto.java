@@ -1,4 +1,4 @@
-package com.tripleCMS.tripleCMS.dto;
+package com.tripleCMS.tripleCMS.dto.responseDto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,6 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 public class UserRegisterResponseDto {
-//    private UUID userUUID;
     private String userId;
 
     private String userPw;

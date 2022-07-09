@@ -1,4 +1,4 @@
-package com.tripleCMS.tripleCMS.dto;
+package com.tripleCMS.tripleCMS.dto.requestDto.place;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TokenResponseDto {
-    String accessToken;
-    String refreshToken;
+public class PlaceRequestDto {
+    private String placeName;
 }

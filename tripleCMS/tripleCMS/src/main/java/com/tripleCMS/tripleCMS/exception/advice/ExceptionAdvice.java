@@ -1,8 +1,6 @@
 package com.tripleCMS.tripleCMS.exception.advice;
 
-import com.tripleCMS.tripleCMS.exception.InvalidRefreshTokenException;
-import com.tripleCMS.tripleCMS.exception.LoginFailureException;
-import com.tripleCMS.tripleCMS.exception.UserIdAlreadyExistsException;
+import com.tripleCMS.tripleCMS.exception.*;
 import com.tripleCMS.tripleCMS.service.ResponseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,6 +31,18 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result invalidRefreshTokenException() {
         return responseService.getFailureResult(-103, "Refresh Token이 유효하지 않습니다.");
+    }
+
+    @ExceptionHandler(PlaceAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result placeAlreadyExistsException() {
+        return responseService.getFailureResult(-104, "이미 존재하는 장소 입니다.");
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result userNotFoundException() {
+        return responseService.getFailureResult(-105, "유저 정보를 찾을 수 없습니다.");
     }
 
 

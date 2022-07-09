@@ -1,6 +1,11 @@
 package com.tripleCMS.tripleCMS.controller;
 
-import com.tripleCMS.tripleCMS.dto.*;
+import com.tripleCMS.tripleCMS.dto.requestDto.jwt.TokenRequestDto;
+import com.tripleCMS.tripleCMS.dto.requestDto.user.UserLoginRequestDto;
+import com.tripleCMS.tripleCMS.dto.requestDto.user.UserRegisterRequestDto;
+import com.tripleCMS.tripleCMS.dto.responseDto.jwt.TokenResponseDto;
+import com.tripleCMS.tripleCMS.dto.responseDto.user.UserLoginResponseDto;
+import com.tripleCMS.tripleCMS.dto.responseDto.user.UserRegisterResponseDto;
 import com.tripleCMS.tripleCMS.service.ResponseService;
 import com.tripleCMS.tripleCMS.service.SignService;
 import lombok.RequiredArgsConstructor;

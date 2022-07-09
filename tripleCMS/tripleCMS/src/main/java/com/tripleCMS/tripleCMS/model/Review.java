@@ -1,9 +1,7 @@
 package com.tripleCMS.tripleCMS.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -19,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name="review")
 public class Review {
 
@@ -27,10 +26,6 @@ public class Review {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
     private UUID reviewUUID;
-
-    // 리뷰 제목
-    @Column(nullable = false, length = 300)
-    private String reviewTitle;
 
     // 리뷰 텍스트
     @Column(nullable = false, length = 2000)
@@ -42,6 +37,7 @@ public class Review {
 
     // 리뷰 작성일
     @CreationTimestamp
+    @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private Timestamp reviewEnrollDate;
 
     // user 테이블 참조
@@ -56,4 +52,6 @@ public class Review {
 
     @OneToMany(mappedBy = "review", fetch = FetchType.EAGER)
     private List<Attphoto> attphotos;
+
+
 }

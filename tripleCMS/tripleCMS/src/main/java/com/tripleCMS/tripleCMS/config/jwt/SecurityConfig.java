@@ -1,4 +1,4 @@
-package com.tripleCMS.tripleCMS.config;
+package com.tripleCMS.tripleCMS.config.jwt;
 
 import com.tripleCMS.tripleCMS.exception.CustomAccessDeniedHandler;
 import com.tripleCMS.tripleCMS.exception.CustomAuthenticationEntryPoint;

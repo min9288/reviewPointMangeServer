@@ -56,6 +56,5 @@
 ## 5. 개발 환경
 - IntelliJ
 - erdCloud
-- VS Code
 
 <br/>

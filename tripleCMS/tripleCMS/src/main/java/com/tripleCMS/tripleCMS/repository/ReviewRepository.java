@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public interface ReviewRepository extends JpaRepository<Review, UUID> {
 
-    Optional<Review> findByReviewUUID(UUID reviewUUID);
+    Optional<Review> findByUserId(UUID userId);
 
     // 리뷰 출력
 //    @Select("select * from review where reviewuuid = #{reviewUUid}")

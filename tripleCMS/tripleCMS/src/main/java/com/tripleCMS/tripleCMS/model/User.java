@@ -26,11 +26,11 @@ public class User{
     @Id @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
-    private UUID userUUID;
+    private UUID userId;
 
     // 회원 아이디
     @Column(nullable = false, unique = true, length = 40)
-    private String userId;
+    private String userName;
 
     // 회원 패스워드
     @Column(nullable = false, length = 100)
@@ -45,8 +45,8 @@ public class User{
     private int userLevel;
 
     // 회원 가입일
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @CreationTimestamp
-    @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private Timestamp userEnrollDate;
 
     @ElementCollection(fetch = FetchType.LAZY)
@@ -54,8 +54,8 @@ public class User{
     private List<Role> roles = new ArrayList<>();
 
     @Builder
-    public User(String userId, String userPw, List<Role> roles) {
-        this.userId = userId;
+    public User(String userName, String userPw, List<Role> roles) {
+        this.userName = userName;
         this.userPw = userPw;
         this.roles = Collections.singletonList(Role.ROLE_MEMBER);
     }
@@ -64,6 +64,7 @@ public class User{
         this.roles.add(role);
     }
 
+//    @Transient
     private String refreshToken;
 
     public void updateRefreshToken(String refreshToken) {

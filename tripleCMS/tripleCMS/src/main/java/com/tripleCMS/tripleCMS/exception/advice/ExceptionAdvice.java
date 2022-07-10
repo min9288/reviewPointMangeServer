@@ -48,8 +48,14 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Result customAccessDeniedHandler() {
+    public Result accessDeniedException() {
         return responseService.getFailureResult(-106, "인증 정보를 확인할 수 없습니다.");
+    }
+
+    @ExceptionHandler(WriterAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result writerAlreadyExistsException() {
+        return responseService.getFailureResult(-107, "한 장소에서 중복으로 작성할 수 없습니다.");
     }
 
 

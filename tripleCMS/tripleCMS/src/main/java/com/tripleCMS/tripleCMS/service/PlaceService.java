@@ -28,9 +28,11 @@ public class PlaceService {
                         .placeName(requestDto.getPlaceName())
                         .build());
         return PlaceAddResponseDto.builder()
+                .placeId(place.getPlaceId())
                 .placeName(place.getPlaceName())
                 .build();
     }
+
 
     public void validateDuplicated(String placeName) {
         if(placeRepository.findByPlaceName(placeName).isPresent()) throw new PlaceAlreadyExistsException();

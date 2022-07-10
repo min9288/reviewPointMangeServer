@@ -10,7 +10,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserLoginResponseDto {
-    private UUID userUUID;
+    private UUID userID;
     private String token;
     private String refreshToken;
 }

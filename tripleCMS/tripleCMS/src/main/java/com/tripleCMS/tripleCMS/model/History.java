@@ -1,6 +1,7 @@
 package com.tripleCMS.tripleCMS.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.tripleCMS.tripleCMS.model.enumPackage.Event;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -23,8 +24,8 @@ public class History {
     private int historyNo;
 
     // 이벤트 타입
-    @Column(nullable = false, length = 20)
-    private String eventType;
+    @Enumerated(EnumType.STRING)
+    private Event type;
 
     // 이벤트 발생시 증감 포인트
     @Column(nullable = false)
@@ -35,17 +36,17 @@ public class History {
     private int pointCalCount;
 
     // 이벤트 발생일시
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @CreationTimestamp
-    @JsonFormat(pattern = "YYYY-MM-dd HH:mm")
     private Timestamp eventEnrollDate;
 
     // user 테이블 참조
     @ManyToOne
-    @JoinColumn(name = "userUUID")
+    @JoinColumn(name = "userId")
     private User user;
 
     // review 테이블 참조
     @ManyToOne
-    @JoinColumn(name = "reviewUUID")
+    @JoinColumn(name = "reviewId")
     private Review review;
 }

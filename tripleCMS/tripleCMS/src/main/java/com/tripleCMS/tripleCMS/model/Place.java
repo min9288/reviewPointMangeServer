@@ -20,7 +20,7 @@ public class Place {
     @Id @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
-    private UUID placeUUID;
+    private UUID placeId;
 
     // 장소 이름
     @Column(nullable = false, unique = true, length = 300)

@@ -10,14 +10,14 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 public class UserRegisterResponseDto {
-    private String userId;
+    private String userName;
 
     private String userPw;
 
     @Builder
-    public UserRegisterResponseDto(String userId, String userPw) {
+    public UserRegisterResponseDto(String userName, String userPw) {
         this.userPw = userPw;
-        this.userId = userId;
+        this.userName = userName;
     }
 
 }

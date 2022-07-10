@@ -9,15 +9,15 @@ import java.util.List;
 
 public class TripleUserDetails implements UserDetails {
 
-    private String userId;
+    private String userName;
     private String userPw;
 
     private Collection<? extends GrantedAuthority> authorities;
 
 
     @Builder
-    public TripleUserDetails(String userId, String userPw, List<GrantedAuthority> authorities) {
-        this.userId = userId;
+    public TripleUserDetails(String userName, String userPw, List<GrantedAuthority> authorities) {
+        this.userName = userName;
         this.userPw = userPw;
         this.authorities = authorities;
     }
@@ -34,7 +34,7 @@ public class TripleUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userId;
+        return userName;
     }
     @Override
     public boolean isAccountNonExpired() {

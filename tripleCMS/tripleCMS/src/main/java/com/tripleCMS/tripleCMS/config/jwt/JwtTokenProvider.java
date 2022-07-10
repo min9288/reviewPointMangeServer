@@ -42,8 +42,8 @@ public class JwtTokenProvider {
     }
 
     // 토큰 생성 로직
-    public String createToken(String userId) {
-        Claims claims = Jwts.claims().setSubject(userId); // 토큰 키 Subject는 중복되지 않는 고유 값 userId로 지정
+    public String createToken(String userName) {
+        Claims claims = Jwts.claims().setSubject(userName); // 토큰 키 Subject는 중복되지 않는 고유 값 userName 지정
         Date now = new Date();
 
         return Jwts.builder()
@@ -65,7 +65,6 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthentication(String token) {
-//        UserDetails userDetails = userDetailsService.loadUserByUsername(getUserId(token));
         TripleUserDetails tripleUserDetails = (TripleUserDetails) tripleUserDetailsService.loadUserByUsername(getUserId(token));
         return new UsernamePasswordAuthenticationToken(tripleUserDetails, "", tripleUserDetails.getAuthorities());
     }

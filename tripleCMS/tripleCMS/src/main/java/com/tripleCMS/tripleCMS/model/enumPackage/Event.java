@@ -1,6 +1,6 @@
 package com.tripleCMS.tripleCMS.model.enumPackage;
 
 public enum Event {
-    // 추가, 수정, 삭제
-    ADD, MOD, DELETE, READ
+    // 리뷰, 장소, 이력
+    REVIEW, PLACE, HISTORY
 }

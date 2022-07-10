@@ -10,21 +10,21 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 public class PlaceFindAllResponseDto {
-    private UUID placeUUID;
+    private UUID placeId;
     private String placeName;
     private int placeReviewCount;
 
     public static PlaceFindAllResponseDto createDto(Place place) {
         return PlaceFindAllResponseDto.builder()
-                .placeUUID(place.getPlaceUUID())
+                .placeId(place.getPlaceId())
                 .placeName(place.getPlaceName())
                 .placeReviewCount(place.getPlaceReviewCount())
                 .build();
     }
 
     @Builder
-    public PlaceFindAllResponseDto(UUID placeUUID, String placeName, int placeReviewCount) {
-        this.placeUUID = placeUUID;
+    public PlaceFindAllResponseDto(UUID placeId, String placeName, int placeReviewCount) {
+        this.placeId = placeId;
         this.placeName = placeName;
         this.placeReviewCount = placeReviewCount;
     }

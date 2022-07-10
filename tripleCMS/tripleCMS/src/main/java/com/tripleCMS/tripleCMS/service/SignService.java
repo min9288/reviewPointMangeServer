@@ -36,30 +36,30 @@ public class SignService {
     // DTO로 들어온 값을 통해 회원가입을 진행
     @Transactional
     public UserRegisterResponseDto registerUser(UserRegisterRequestDto requestDto) {
-        validateDuplicated(requestDto.getUserId());
+        validateDuplicated(requestDto.getUserName());
         User user = userRepository.save(
                 User.builder()
-                        .userId(requestDto.getUserId())
+                        .userName(requestDto.getUserName())
                         .userPw(passwordEncoder.encode(requestDto.getUserPw()))
                         .build());
         return UserRegisterResponseDto.builder()
-                .userId(user.getUserId())
+                .userName(user.getUserName())
                 .userPw(user.getUserPw())
                 .build();
     }
 
-    public void validateDuplicated(String userId) {
-        if (userRepository.findByUserId(userId).isPresent()) throw new UserIdAlreadyExistsException();
+    public void validateDuplicated(String userName) {
+        if (userRepository.findByUserName(userName).isPresent()) throw new UserIdAlreadyExistsException();
     }
 
     // 로그인 구현
     @Transactional
     public UserLoginResponseDto loginUser(UserLoginRequestDto requestDto) {
-        User user = userRepository.findByUserId(requestDto.getUserId()).orElseThrow(UserNotFoundException::new);
+        User user = userRepository.findByUserName(requestDto.getUserName()).orElseThrow(UserNotFoundException::new);
         if(!passwordEncoder.matches(requestDto.getUserPw(), user.getUserPw()))
             throw new LoginFailureException();
         user.updateRefreshToken(jwtTokenProvider.createRefreshToken());
-        return new UserLoginResponseDto(user.getUserUUID(), jwtTokenProvider.createToken(requestDto.getUserId()), user.getRefreshToken());
+        return new UserLoginResponseDto(user.getUserId(), jwtTokenProvider.createToken(requestDto.getUserName()), user.getRefreshToken());
     }
 
     // 토큰 재발행
@@ -71,7 +71,7 @@ public class SignService {
 
         if(!user.getRefreshToken().equals(requestDto.getRefreshToken()))
             throw new InvalidRefreshTokenException();
-        String accessToken = jwtTokenProvider.createToken(user.getUserId());
+        String accessToken = jwtTokenProvider.createToken(user.getUserName());
         String refreshToken = jwtTokenProvider.createRefreshToken();
         user.updateRefreshToken(refreshToken);
         return new TokenResponseDto(accessToken, refreshToken);
@@ -79,7 +79,7 @@ public class SignService {
     public User findUserByToken(TokenRequestDto requestDto) {
         Authentication auth = jwtTokenProvider.getAuthentication(requestDto.getAccessToken());
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        String userId = userDetails.getUsername();
-        return userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
+        String userName = userDetails.getUsername();
+        return userRepository.findByUserName(userName).orElseThrow(UserNotFoundException::new);
     }
 }

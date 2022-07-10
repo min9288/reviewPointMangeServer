@@ -22,6 +22,8 @@ public class SingController {
     private final SignService signService;
     private final ResponseService responseService;
 
+    private final ReviewController reviewController;
+
     @PostMapping("/register")
     public SingleResult<UserRegisterResponseDto> register(@RequestBody UserRegisterRequestDto requestDto) {
         UserRegisterResponseDto responseDto = signService.registerUser(requestDto);
@@ -34,9 +36,17 @@ public class SingController {
         return responseService.getSingleResult(responseDto);
     }
 
+//    @PostMapping("/login")
+//    public UserLoginResponseDto login(@RequestBody UserLoginRequestDto requestDto) {
+//        UserLoginResponseDto responseDto = signService.loginUser(requestDto);
+//        return reviewController.test(responseDto);
+//    }
+
     @PostMapping("/reissue")
     public SingleResult<TokenResponseDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
         TokenResponseDto responseDto = signService.reIssue(tokenRequestDto);
         return responseService.getSingleResult(responseDto);
     }
+
+
 }

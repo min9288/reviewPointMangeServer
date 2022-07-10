@@ -26,11 +26,11 @@ public class TripleUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        User user = userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        User user = userRepository.findByUserName(userName).orElseThrow(UserNotFoundException::new);
 
         return TripleUserDetails.builder()
-                .userId(user.getUserId())
+                .userName(user.getUserName())
                 .userPw(user.getUserPw())
                 .authorities(user.getRoles().stream()
                         .map(auth -> new SimpleGrantedAuthority(auth.toString())).collect(Collectors.toList()))

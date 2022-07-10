@@ -9,12 +9,12 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 public class PlaceAddResponseDto {
-    private UUID placeUUID;
+    private UUID placeId;
     private String placeName;
 
     @Builder
-    public PlaceAddResponseDto(UUID placeUUID, String placeName) {
-        this.placeUUID = placeUUID;
+    public PlaceAddResponseDto(UUID placeId, String placeName) {
+        this.placeId = placeId;
         this.placeName = placeName;
     }
 }

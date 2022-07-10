@@ -21,9 +21,9 @@ public class ReviewAddRequestDto {
     private String content;
     private UUID userId;
     private UUID placeId;
-    private List<Attphoto> attachedPhotoIds;
+    private List<String> attachedPhotoIds;
 
-    public ReviewAddRequestDto(User user, Place place) {
+    public ReviewAddRequestDto(User  user, Place  place) {
         this.userId = user.getUserId();
         this.placeId = place.getPlaceId();
     }

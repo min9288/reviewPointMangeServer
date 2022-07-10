@@ -1,6 +1,7 @@
 package com.tripleCMS.tripleCMS.repository;
 
 import com.tripleCMS.tripleCMS.model.Review;
+import com.tripleCMS.tripleCMS.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 public interface ReviewRepository extends JpaRepository<Review, UUID> {
 
+//    Optional<Review> findByUserId(UUID userId);
     Optional<Review> findByUserId(UUID userId);
 
     // 리뷰 출력

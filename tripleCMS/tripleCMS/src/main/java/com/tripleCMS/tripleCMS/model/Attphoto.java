@@ -2,12 +2,13 @@ package com.tripleCMS.tripleCMS.model;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -16,22 +17,20 @@ import java.util.UUID;
 public class Attphoto {
 
     // 사진 UUID
-    @Id @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)")
-    private UUID photoId;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long photoNo;
 
     // 사진 파일명
-    @Column(nullable = false, length = 300)
-    private String photoName;
+    private String attachedPhotoIds;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="reviewId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Review review;
 
     @Builder
-    public Attphoto(String photoName, Review review) {
-        this.photoName = photoName;
+    public Attphoto(String attachedPhotoIds, Review review) {
+        this.attachedPhotoIds = attachedPhotoIds;
         this.review = review;
     }
 

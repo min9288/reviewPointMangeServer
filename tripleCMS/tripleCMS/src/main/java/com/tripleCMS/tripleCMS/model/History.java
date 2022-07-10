@@ -21,7 +21,7 @@ public class History {
 
     // 이력 번호
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int historyNo;
+    private long historyNo;
 
     // 이벤트 타입
     @Enumerated(EnumType.STRING)

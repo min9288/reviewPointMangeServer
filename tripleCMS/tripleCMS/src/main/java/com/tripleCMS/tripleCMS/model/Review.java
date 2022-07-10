@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tripleCMS.tripleCMS.model.enumPackage.Action;
 import com.tripleCMS.tripleCMS.model.enumPackage.Event;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,14 +50,16 @@ public class Review {
     @Column(columnDefinition = "BINARY(16)")
     private UUID placeId;
 
-    // user 테이블 참조
+////    user 테이블 참조
 //    @ManyToOne
-//    @JoinColumn(name = "userUUID")
+//    @JoinColumn(name = "userId")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
 //    private User user;
-
-    // place 테이블 참조
+//
+////     place 테이블 참조
 //    @ManyToOne
-//    @JoinColumn(name = "placeUUID")
+//    @JoinColumn(name = "placeId")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
 //    private Place place;
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
@@ -74,6 +77,7 @@ public class Review {
         this.userId = user.getUserId();
         this.placeId = place.getPlaceId();
     }
+
 
 
 }

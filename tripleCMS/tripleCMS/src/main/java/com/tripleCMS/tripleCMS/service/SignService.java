@@ -5,12 +5,11 @@ import com.tripleCMS.tripleCMS.dto.requestDto.jwt.TokenRequestDto;
 import com.tripleCMS.tripleCMS.dto.requestDto.user.UserLoginRequestDto;
 import com.tripleCMS.tripleCMS.dto.requestDto.user.UserRegisterRequestDto;
 import com.tripleCMS.tripleCMS.dto.responseDto.jwt.TokenResponseDto;
+import com.tripleCMS.tripleCMS.dto.responseDto.user.UserGetResponseDto;
 import com.tripleCMS.tripleCMS.dto.responseDto.user.UserLoginResponseDto;
 import com.tripleCMS.tripleCMS.dto.responseDto.user.UserRegisterResponseDto;
-import com.tripleCMS.tripleCMS.exception.InvalidRefreshTokenException;
-import com.tripleCMS.tripleCMS.exception.LoginFailureException;
-import com.tripleCMS.tripleCMS.exception.UserIdAlreadyExistsException;
-import com.tripleCMS.tripleCMS.exception.UserNotFoundException;
+import com.tripleCMS.tripleCMS.exception.*;
+import com.tripleCMS.tripleCMS.model.Place;
 import com.tripleCMS.tripleCMS.model.User;
 import com.tripleCMS.tripleCMS.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +19,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 
 @Service
@@ -82,4 +83,19 @@ public class SignService {
         String userName = userDetails.getUsername();
         return userRepository.findByUserName(userName).orElseThrow(UserNotFoundException::new);
     }
+
+    public UserGetResponseDto getUserUser(UUID userId){
+        User user = findByUser(userId);
+        return UserGetResponseDto.builder()
+                .userId(userId)
+                .userName(user.getUserName())
+                .point(user.getPoint())
+                .userLevel(user.getUserLevel())
+                .build();
+    }
+
+    private User findByUser(UUID userId) {
+        return userRepository.findUserByUserId(userId).orElseThrow(PlaceNotFoundException::new);
+    }
+
 }

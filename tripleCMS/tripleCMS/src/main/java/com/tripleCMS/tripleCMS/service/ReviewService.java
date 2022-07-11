@@ -1,10 +1,12 @@
 package com.tripleCMS.tripleCMS.service;
 
 import com.tripleCMS.tripleCMS.dto.requestDto.review.ReviewAddRequestDto;
+import com.tripleCMS.tripleCMS.dto.requestDto.review.ReviewUpdateRequestDto;
 import com.tripleCMS.tripleCMS.dto.responseDto.history.HistoryResponseDto;
 import com.tripleCMS.tripleCMS.dto.responseDto.review.ReviewDeleteResponseDto;
 import com.tripleCMS.tripleCMS.dto.responseDto.review.ReviewGetResponseDto;
 import com.tripleCMS.tripleCMS.dto.responseDto.review.ReviewResponseDto;
+import com.tripleCMS.tripleCMS.dto.responseDto.review.ReviewUpdateResponseDto;
 import com.tripleCMS.tripleCMS.exception.PlaceNotFoundException;
 import com.tripleCMS.tripleCMS.exception.ReviewNotFoundException;
 import com.tripleCMS.tripleCMS.exception.WriterAlreadyExistsException;
@@ -116,7 +118,7 @@ public class ReviewService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public ReviewDeleteResponseDto deleteReview(UUID reviewId) {
         Review review = findReviewByReviewId(reviewId);
         String temp = review.getPhotoList();
@@ -146,6 +148,36 @@ public class ReviewService {
 
         return responseDto;
     }
+
+    @Transactional
+    public ReviewUpdateResponseDto updateReview(ReviewUpdateRequestDto requestDto) {
+        Review review = findReviewByReviewId(requestDto.getReviewId());
+        List<String> imageList = new ArrayList<>();
+
+        if(!(requestDto.getAttachedPhotoIds().equals("[]"))){
+            String temp = requestDto.getAttachedPhotoIds();
+            imageList = Arrays.asList(temp.split(","));
+        }
+
+        review.setContent(requestDto.getContent());
+        review.setPhotoList(requestDto.getAttachedPhotoIds());
+        reviewRepository.save(review);
+
+
+       return  ReviewUpdateResponseDto.builder()
+                .type(Event.REVIEW)
+                .action(Action.MOD)
+                .reviewId(review.getReviewId())
+                .content(review.getContent())
+                .attachedPhotoIds(imageList)
+                .userId(review.getUserId())
+                .reviewId(review.getReviewId())
+                .placeId(review.getPlaceId())
+                .build();
+    }
+
+
+
 
     public void validateDuplicated(UUID userId, UUID placeId) {
         if(reviewRepository.findReviewByUserIdAndPlaceId(userId, placeId).isPresent()) throw new WriterAlreadyExistsException();

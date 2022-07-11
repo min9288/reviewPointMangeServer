@@ -40,7 +40,7 @@ public class EventService {
                 eventResponseDto = addEventService(reqeustDto);
                 break;
             case MOD:
-//                eventResponseDto = modEventService(reqeustDto);
+                eventResponseDto = modEventService(reqeustDto);
                 break;
             case DELETE:
                 eventResponseDto = deleteEventService(reqeustDto);
@@ -115,20 +115,70 @@ public class EventService {
 
     }
 
-//    public EventResponseDto modEventService(EventReqeustDto reqeustDto) {
-//
-//    }
+    public EventResponseDto modEventService(EventReqeustDto reqeustDto) {
+        Review review = findByReview(reqeustDto.getReviewId()); // 작성 리뷰
+        User user = findUserById(reqeustDto.getUserId()); // 리뷰 수정 자
+
+        int userPoint = user.getPoint(); // 유저 보유 포인트
+        int photoCount = review.getPhotoCount(); // 기존 리뷰 첨부 사진 수
+        int transactionPoint = 0; // 트랜잭션 포인트
+
+        int updatePhotoCount = reqeustDto.getAttachedPhotoIds().size(); // 수정 후 남아있는 사진 수
+
+        if(photoCount > 0) {
+            if(updatePhotoCount == 0) {
+                transactionPoint -= 1;
+                userPoint -= 1;
+                user.setPoint(userPoint);
+
+                if(0 == userPoint || userPoint < 5) {
+                    user.setUserLevel(0);
+                } else if(5 <= userPoint ||  userPoint <= 7 ){
+                    user.setUserLevel(1);
+                } else if (40 <= userPoint || userPoint <= 42) {
+                    user.setUserLevel(2);
+                } else if (100 <= userPoint || userPoint <= 102) {
+                    user.setUserLevel(3);
+                }
+                userRepository.save(user);
+            }
+        }
+
+        // 이력 등록 프로세스
+        History history = historyRepository.save(
+                History.builder()
+                        .type(reqeustDto.getType())
+                        .action(reqeustDto.getAction())
+                        .transactionPoint(transactionPoint)
+                        .totalPoint(userPoint)
+                        .userId(reqeustDto.getUserId())
+                        .placeId(reqeustDto.getPlaceId())
+                        .reviewId(reqeustDto.getReviewId())
+                        .build());
+
+        return EventResponseDto.builder()
+                .action(reqeustDto.getAction())
+                .userId(reqeustDto.getUserId())
+                .placeId(reqeustDto.getPlaceId())
+                .reviewId(reqeustDto.getReviewId())
+                .transactionPoint(transactionPoint)
+                .totalPoint(userPoint)
+                .build();
+
+    }
 
     @Transactional
     // 리뷰 삭제 및 포인트 회수 프로세스
     public EventResponseDto deleteEventService(EventReqeustDto reqeustDto) {
         Review review = findByReview(reqeustDto.getReviewId()); // 작성 리뷰
         User user = findUserById(reqeustDto.getUserId()); // 리뷰삭제 유저
-
+        int transactionPoint = 0; // 트랜잭션 포인트
         int userPoint = user.getPoint(); // 유저 보유 포인트
 
         // 삭제 리뷰로 얻은 포인트
         int deleteReviewGainPoint = review.getSavingPoint();
+
+        transactionPoint -= deleteReviewGainPoint;
 
         // 포인트 회수
         // 트랜잭션 후 포인트
@@ -151,7 +201,7 @@ public class EventService {
                 History.builder()
                         .type(reqeustDto.getType())
                         .action(reqeustDto.getAction())
-                        .transactionPoint(deleteReviewGainPoint)
+                        .transactionPoint(transactionPoint)
                         .totalPoint(userPoint)
                         .userId(reqeustDto.getUserId())
                         .placeId(reqeustDto.getPlaceId())
@@ -166,11 +216,12 @@ public class EventService {
                 .userId(reqeustDto.getUserId())
                 .placeId(reqeustDto.getPlaceId())
                 .reviewId(reqeustDto.getReviewId())
-                .transactionPoint(deleteReviewGainPoint)
+                .transactionPoint(transactionPoint)
                 .totalPoint(userPoint)
                 .build();
 
     }
+
 
     private User findUserById(UUID userId) {
         return userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);

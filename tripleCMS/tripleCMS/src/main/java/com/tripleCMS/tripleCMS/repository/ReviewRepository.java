@@ -16,12 +16,17 @@ public interface ReviewRepository extends JpaRepository<Review, UUID> {
 
     Optional<Review> findReviewByReviewId(UUID reviewId);
 
+    Optional<Review> findReviewByUserIdAndPlaceId(UUID UserId, UUID PlaceId);
+
     Optional<Review> findByUserId(UUID userId);
 
     List<Review> findAllByUserId(UUID userId);
 
-    @Query("select r.userId from Review r where r.placeId = :placeId and r.userId = :userId")
-    Optional<Review> findByWriter(@Param("userId") UUID userId, @Param("placeId") UUID placeID);
+//    @Query("select r.userId from Review r where r.placeId = :placeId and r.userId = :userId")
+//    Optional<Review> findByWriter(@Param("userId") UUID userId, @Param("placeId") UUID placeID);
+
+//    @Query("select r.userId from Review r where r.placeId = :placeId and r.userId = :userId")
+//    Optional<Review> findReviewByUserIdAndPlaceId(@Param("userId") UUID userId, @Param("placeId") UUID placeID);
 
 
 }

@@ -53,8 +53,7 @@ public class ReviewService {
                         .build());
 
         Place place = findByPlace(requestDto.getPlaceId());
-        int placeTotalReview = place.getPlaceReviewCount();
-        placeTotalReview += 1;
+        int placeTotalReview = place.getPlaceReviewCount() + 1;
         place.setPlaceReviewCount(placeTotalReview);
         placeRepository.save(place);
 
@@ -73,6 +72,7 @@ public class ReviewService {
     public ReviewResponseDto addReview(ReviewAddRequestDto requestDto, List<MultipartFile> multipartFiles) {
         validateDuplicated(requestDto.getUserId(), requestDto.getPlaceId());
         List<String> imageList =  s3Service.uploadFile(multipartFiles);
+        int imageCount = imageList.size();
         String imageStrList = String.join(",", imageList);
         Review review = reviewRepository.save(
                 Review.builder()
@@ -92,8 +92,7 @@ public class ReviewService {
         }
 
         Place place = findByPlace(requestDto.getPlaceId());
-        int placeTotalReview = place.getPlaceReviewCount();
-        placeTotalReview += 1;
+        int placeTotalReview = place.getPlaceReviewCount() + 1;
         place.setPlaceReviewCount(placeTotalReview);
         placeRepository.save(place);
 
@@ -116,7 +115,7 @@ public class ReviewService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public ReviewDeleteResponseDto deleteReview(UUID reviewId) {
         Review review = findReviewByReviewId(reviewId);
         String temp = review.getPhotoList();
@@ -132,14 +131,16 @@ public class ReviewService {
                 .placeId(review.getPlaceId())
                 .build();
 
-        reviewRepository.delete(review);
-
         return responseDto;
     }
 
     public void validateDuplicated(UUID userId, UUID placeId) {
-        if(reviewRepository.findByWriter(userId, placeId).isPresent()) throw new WriterAlreadyExistsException();
+        if(reviewRepository.findReviewByUserIdAndPlaceId(userId, placeId).isPresent()) throw new WriterAlreadyExistsException();
     }
+
+//    public void funValidateDuplicated(UUID userId, UUID placeId) {
+//        return reviewRepository.findByWriter(userId, placeId).isPresent()) throw new WriterAlreadyExistsException();
+//    }
 
     private Place findByPlace(UUID placeId) {
         return placeRepository.findByPlaceId(placeId).orElseThrow(PlaceNotFoundException::new);

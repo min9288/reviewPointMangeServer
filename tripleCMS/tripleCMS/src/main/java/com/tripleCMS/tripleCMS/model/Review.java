@@ -38,6 +38,9 @@ public class Review {
     @ColumnDefault("0")
     private int photoCount;
 
+    @ColumnDefault("0")
+    private int savingPoint;
+
     // 리뷰 작성일
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @CreationTimestamp

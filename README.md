@@ -134,7 +134,7 @@ Post
 ```bash 
 Get
 * 로그인 Response 값에서 userID 값을 주소에 붙여주세요 
-* 13.125.166.209:8080/api/sign/user/{userID}
+* 13.125.166.209:8080/api/sign/user/유저아이디
 ```
 
 <p align="center">
@@ -169,11 +169,167 @@ Get
 <img src = "./img/getPlace.png" width=45%>
 </p>
 
-
-
-
-
-
+> * 등록된 장소들의 placeId / placeName / placeReviewCount(등록 리뷰 수) 를 확인 할 수 있습니다.
 
 
 <br/>
+
+🔍 사진없는 리뷰 등록 및 포인트 적립 
+
+
+```bash 
+Post 
+* 사진없는 리뷰 등록
+* 13.125.166.209:8080/api/review/add
+
+{
+"type": "REVIEW",
+"action": "ADD",
+"content": "좋아요!!",
+"attachedPhotoIds" : [],
+"userId": "유저 아이디",
+"placeId": "장소 아이디"
+}
+
+-------------------------------
+
+Post
+* 이벤트
+* 13.125.166.209:8080/api/events
+
+{
+    "type": "REVIEW",
+    "action": "ADD",
+    "reviewId": "fefe829a-7c09-4f06-834e-b8e56f3341cc",
+    "content": "좋아요!!",
+    "attachedPhotoIds": [],
+    "userId": "1393d411-7dc8-45c2-82fd-0810feeb66d3",
+    "placeId": "952af4cc-468b-448a-92d5-fcbf11a2d7a7"
+}
+
+```
+
+<p align="center">
+<img src = "./img/addNonPhotoReview.png" width=45%>
+<img src = "./img/addEventNonPhoto.png" width=45%>
+</p>
+
+> * 리뷰 등록 후 나오는 Response 값을 복사 후 그대로 복사 붙여넣으시면 됩니다.
+> * 리뷰 등록 시 리뷰는 등록되고 포인트는 적립 되지 않습니다. 
+> * 이벤트를 통해서 포인트가 적립됩니다.
+> * 이벤트 Response 값을 통해 포인트 적립을 확인 할 수 있습니다.
+> * 글 리뷰 1점 / 글 + 사진 리뷰 2점 / 여행장소 최초 리뷰 1점 추가
+
+<br/>
+
+🔍 이벤트 발생 이력 조회
+
+```bash 
+Get
+* 13.125.166.209:8080/api/history/유저아이디
+
+```
+
+<p align="center">
+<img src = "./img/history.png">
+</p>
+
+> * 해당 유저의 이벤트 발생 이력을 확인 할 수 있습니다.
+> * 포인트 증감치도 확인 할 수 있습니다.
+
+<br/>
+
+🔍 사진있는 리뷰 등록 및 S3업로드
+
+```bash 
+Post
+* 13.125.166.209:8080/api/review/addAttPhoto
+* form-data 를 사용했습니다.
+* 이번 케이스는 사진으로 확인 부탁드립니다..!
+* key : requestDto / 
+* value : {
+            "type": "REVIEW",
+            "action": "ADD",
+            "content": "좋아요!!",
+            "userId": "유저 아이디",
+            "placeId": "장소 아이디"
+        }
+* key : multipartFiles
+* value : file 
+(file 입력후, 버튼 누르면 탐색기창이 나옵니다, 여기서 한개 또는 여러개(ctrl키 누르고) 선택해주세요)
+
+```
+
+<p align="center">
+<img src = "./img/addPhotoReview.png">
+<img src = "./img/s3.png">
+</p>
+
+> * 사진리뷰를 등록하면, 첨부사진의 S3에 업로드 됩니다.
+> * 이전 이벤트 등록과 동일하게 Response 값 그대로 복사해서 붙여넣어 주세요..!
+> * 마찬가지로, 이벤트 등록 후 Response 값에서 트랜잭션 내용을 확인 할 수 있습니다.
+
+<br/>
+
+🔍 등록한 리뷰 조회
+```bash 
+Get
+* 13.125.166.209:8080/api/review/유저아이디
+
+```
+
+<p align="center">
+<img src = "./img/searchReview.png">
+</p>
+
+> * 조회하면 해당 유저가 등록한 리뷰들을 확인 할 수 있습니다.
+
+<br/>
+
+🔍 등록한 리뷰 삭제
+```bash 
+Delete
+* 13.125.166.209:8080/api/review/리뷰아이디
+
+```
+
+<p align="center">
+<img src = "./img/deleteReview.png">
+<img src = "./img/s3Delete.png">
+</p>
+
+> * 진행하면 리뷰가 삭제되면 올렸던 사진들도 모두 삭제되고 s3에도 반영됩니다.
+> * 이것도 동일하게 이벤트에 복사 붙여넣기 해주세요.
+> * 리뷰가 삭제될 시, 이 리뷰로 받은 포인트를 회수됩니다.
+
+<br/>
+
+🔍 등록한 리뷰 수정
+```bash 
+Put
+* 13.125.166.209:8080/api/review/update
+* 수정 기능은 미비한 부분으로, 기존 등록과 삭제와 다르게 진행해야합니다.
+* 먼저, 유저의 리뷰를 조회해주세요 (Get)(13.125.166.209:8080/api/review/유저아이디)
+* 조회한 값이 null 이라면 아래와 같이 "attachedPhotoIds" value 값을 고쳐주세요.
+* 그리고 그대로 복사해서 수정 값에 넣어주시면 됩니다.
+* 이 부분은 미완성으로, S3 과 연동이 안되서 사진추가도 할 수 없습니다..
+* 다만, "[사진Id, 사진Id]" (문자열이라 대괄호옆 쌍따옴표 붙여주셔야 됩니다) 이런식으로는 변경 할 수 있습니다.
+
+{
+            "reviewId": "fefe829a-7c09-4f06-834e-b8e56f3341cc",
+            "content": "좋아요!!",
+            "attachedPhotoIds": "[]",
+            "userId": "1393d411-7dc8-45c2-82fd-0810feeb66d3",
+            "placeId": "952af4cc-468b-448a-92d5-fcbf11a2d7a7"
+}
+
+```
+
+<p align="center">
+<img src = "./img/updateReview.png">
+</p>
+
+> * 진행하면 리뷰가 수정되며, 마찬가지로 Response 값 복사 붙여넣기 하면 포인트 반영됩니다.
+
+
+

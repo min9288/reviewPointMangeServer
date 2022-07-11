@@ -64,6 +64,12 @@ public class ExceptionAdvice {
         return responseService.getFailureResult(-108, "장소를 찾을 수 없습니다.");
     }
 
+    @ExceptionHandler(ReviewNotFoundException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result reviewNotFoundException() {
+        return responseService.getFailureResult(-109, "리뷰가 존재하지 않습니다.");
+    }
+
 
 
 }

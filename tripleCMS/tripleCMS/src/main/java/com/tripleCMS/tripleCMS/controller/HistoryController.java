@@ -22,7 +22,7 @@ public class HistoryController {
 
     @GetMapping("/{userId}")
     public MultipleResult<HistoryResponseDto> findHistory(@PathVariable("userId") UUID userId) {
-        return responseService.getMultipleResult( historyService.getUserHistory(userId));
+        return responseService.getMultipleResult(historyService.getUserHistory(userId));
     }
 
 }

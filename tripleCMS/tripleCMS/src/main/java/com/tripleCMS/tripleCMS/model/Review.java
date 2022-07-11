@@ -49,6 +49,9 @@ public class Review {
     @Column(columnDefinition = "BINARY(16)")
     private UUID placeId;
 
+    @Column(length = 2000)
+    private String photoList;
+
 ////    user 테이블 참조
 //    @ManyToOne
 //    @JoinColumn(name = "userId")

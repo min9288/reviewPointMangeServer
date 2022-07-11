@@ -1,14 +1,19 @@
 package com.tripleCMS.tripleCMS.service;
 
-import com.tripleCMS.tripleCMS.config.S3Uploader;
 import com.tripleCMS.tripleCMS.dto.requestDto.review.ReviewAddRequestDto;
-import com.tripleCMS.tripleCMS.dto.responseDto.review.ReviewAddResponseDto;
-import com.tripleCMS.tripleCMS.exception.PlaceAlreadyExistsException;
+import com.tripleCMS.tripleCMS.dto.responseDto.history.HistoryResponseDto;
+import com.tripleCMS.tripleCMS.dto.responseDto.review.ReviewDeleteResponseDto;
+import com.tripleCMS.tripleCMS.dto.responseDto.review.ReviewGetResponseDto;
+import com.tripleCMS.tripleCMS.dto.responseDto.review.ReviewResponseDto;
 import com.tripleCMS.tripleCMS.exception.PlaceNotFoundException;
+import com.tripleCMS.tripleCMS.exception.ReviewNotFoundException;
 import com.tripleCMS.tripleCMS.exception.WriterAlreadyExistsException;
 import com.tripleCMS.tripleCMS.model.Attphoto;
+import com.tripleCMS.tripleCMS.model.History;
 import com.tripleCMS.tripleCMS.model.Place;
 import com.tripleCMS.tripleCMS.model.Review;
+import com.tripleCMS.tripleCMS.model.enumPackage.Action;
+import com.tripleCMS.tripleCMS.model.enumPackage.Event;
 import com.tripleCMS.tripleCMS.repository.PhotoRepository;
 import com.tripleCMS.tripleCMS.repository.PlaceRepository;
 import com.tripleCMS.tripleCMS.repository.ReviewRepository;
@@ -17,8 +22,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +41,7 @@ public class ReviewService {
 
     // DTO로 들어온 값을 통해 리뷰 등록
     @Transactional
-    public ReviewAddResponseDto addReview(ReviewAddRequestDto requestDto) {
+    public ReviewResponseDto addReview(ReviewAddRequestDto requestDto) {
         validateDuplicated(requestDto.getUserId(), requestDto.getPlaceId());
         Review review = reviewRepository.save(
                 Review.builder()
@@ -50,7 +58,7 @@ public class ReviewService {
         place.setPlaceReviewCount(placeTotalReview);
         placeRepository.save(place);
 
-        return ReviewAddResponseDto.builder()
+        return ReviewResponseDto.builder()
                 .type(review.getType())
                 .action(review.getAction())
                 .reviewId(review.getReviewId())
@@ -62,9 +70,10 @@ public class ReviewService {
     }
 
     @Transactional
-    public ReviewAddResponseDto addReview(ReviewAddRequestDto requestDto, List<MultipartFile> multipartFiles) {
+    public ReviewResponseDto addReview(ReviewAddRequestDto requestDto, List<MultipartFile> multipartFiles) {
         validateDuplicated(requestDto.getUserId(), requestDto.getPlaceId());
         List<String> imageList =  s3Service.uploadFile(multipartFiles);
+        String imageStrList = String.join(",", imageList);
         Review review = reviewRepository.save(
                 Review.builder()
                         .type(requestDto.getType())
@@ -72,6 +81,7 @@ public class ReviewService {
                         .content(requestDto.getContent())
                         .userId(requestDto.getUserId())
                         .placeId(requestDto.getPlaceId())
+                        .photoList(imageStrList)
                         .build());
         for (String image : imageList) {
             Attphoto attphoto = photoRepository.save(
@@ -87,7 +97,7 @@ public class ReviewService {
         place.setPlaceReviewCount(placeTotalReview);
         placeRepository.save(place);
 
-        return ReviewAddResponseDto.builder()
+        return ReviewResponseDto.builder()
                 .type(review.getType())
                 .action(review.getAction())
                 .reviewId(review.getReviewId())
@@ -98,6 +108,35 @@ public class ReviewService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
+    public List<ReviewGetResponseDto> getUserReview(UUID userId) {
+        List<Review> reviewList = reviewRepository.findAllByUserId(userId);
+        return reviewList.stream()
+                .map(review -> ReviewGetResponseDto.createDto(review))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public ReviewDeleteResponseDto deleteReview(UUID reviewId) {
+        Review review = findReviewByReviewId(reviewId);
+        String temp = review.getPhotoList();
+        List<String> imageList = Arrays.asList(temp.split(","));
+        ReviewDeleteResponseDto responseDto = ReviewDeleteResponseDto.builder()
+                .type(Event.REVIEW)
+                .action(Action.DELETE)
+                .reviewId(review.getReviewId())
+                .content(review.getContent())
+                .attachedPhotoIds(imageList)
+                .userId(review.getUserId())
+                .reviewId(review.getReviewId())
+                .placeId(review.getPlaceId())
+                .build();
+
+        reviewRepository.delete(review);
+
+        return responseDto;
+    }
+
     public void validateDuplicated(UUID userId, UUID placeId) {
         if(reviewRepository.findByWriter(userId, placeId).isPresent()) throw new WriterAlreadyExistsException();
     }
@@ -105,5 +144,11 @@ public class ReviewService {
     private Place findByPlace(UUID placeId) {
         return placeRepository.findByPlaceId(placeId).orElseThrow(PlaceNotFoundException::new);
     }
+    private Review findReviewByReviewId(UUID reviewId) {
+        return reviewRepository.findReviewByReviewId(reviewId).orElseThrow(ReviewNotFoundException::new);
+    }
+
+    // s3 이미지 삭제 해줘야됨
+
 
 }

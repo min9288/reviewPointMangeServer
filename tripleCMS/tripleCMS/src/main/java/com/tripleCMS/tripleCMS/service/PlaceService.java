@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class PlaceService {
     private final PlaceRepository placeRepository;
 

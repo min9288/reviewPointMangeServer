@@ -2,11 +2,10 @@ package com.tripleCMS.tripleCMS.repository;
 
 import com.tripleCMS.tripleCMS.model.Review;
 import com.tripleCMS.tripleCMS.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.*;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,14 +13,10 @@ import java.util.UUID;
 
 public interface ReviewRepository extends JpaRepository<Review, UUID> {
 
-//    Optional<Review> findByUserId(UUID userId);
     Optional<Review> findByUserId(UUID userId);
 
-    // 리뷰 출력
-//    @Select("select * from review where reviewuuid = #{reviewUUid}")
-//    public List<Review> findByReviewUUID(UUID reviewUUid);
+    @Query("select r.userId from Review r where r.placeId = :placeId and r.userId = :userId")
+    Optional<Review> findByWriter(@Param("userId") UUID userId, @Param("placeId") UUID placeID);
 
-    // 리뷰 작성
-//    @Insert("inset into review()")
 
 }

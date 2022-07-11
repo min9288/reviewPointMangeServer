@@ -23,8 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Slf4j
 public class SignService {
 

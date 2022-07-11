@@ -9,5 +9,8 @@ import java.util.UUID;
 
 public interface PlaceRepository extends JpaRepository<Place, UUID> {
     Optional<Place> findByPlaceName(String placeName);
-    List<Place> findByPlaceId(UUID placeId);
+
+    Optional<Place> findByPlaceId(UUID placeId);
+
+
 }

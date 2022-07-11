@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class PlaceService {
     private final PlaceRepository placeRepository;
 
@@ -38,6 +38,7 @@ public class PlaceService {
         if(placeRepository.findByPlaceName(placeName).isPresent()) throw new PlaceAlreadyExistsException();
     }
 
+    @Transactional(readOnly = true)
     public List<PlaceFindAllResponseDto> findAllPlace() {
         List<Place> places = placeRepository.findAll();
         return places.stream()

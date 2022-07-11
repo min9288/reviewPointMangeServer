@@ -23,7 +23,7 @@ public class ReviewAddRequestDto {
     private UUID placeId;
     private List<String> attachedPhotoIds;
 
-    public ReviewAddRequestDto(User  user, Place  place) {
+    public ReviewAddRequestDto(User user, Place place) {
         this.userId = user.getUserId();
         this.placeId = place.getPlaceId();
     }

@@ -1,9 +1,7 @@
 package com.tripleCMS.tripleCMS.controller;
 
 import com.tripleCMS.tripleCMS.dto.requestDto.review.ReviewAddRequestDto;
-import com.tripleCMS.tripleCMS.dto.responseDto.events.EventAddResponseDto;
 import com.tripleCMS.tripleCMS.dto.responseDto.review.ReviewAddResponseDto;
-import com.tripleCMS.tripleCMS.dto.responseDto.user.UserLoginResponseDto;
 import com.tripleCMS.tripleCMS.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

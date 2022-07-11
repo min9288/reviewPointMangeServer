@@ -58,6 +58,12 @@ public class ExceptionAdvice {
         return responseService.getFailureResult(-107, "한 장소에서 중복으로 작성할 수 없습니다.");
     }
 
+    @ExceptionHandler(PlaceNotFoundException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result placeNotFoundException() {
+        return responseService.getFailureResult(-108, "장소를 찾을 수 없습니다.");
+    }
+
 
 
 }

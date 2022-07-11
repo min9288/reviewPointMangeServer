@@ -1,6 +1,7 @@
 package com.tripleCMS.tripleCMS.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.tripleCMS.tripleCMS.model.enumPackage.Action;
 import com.tripleCMS.tripleCMS.model.enumPackage.Event;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,8 +11,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -27,26 +27,53 @@ public class History {
     @Enumerated(EnumType.STRING)
     private Event type;
 
+    // 액션
+    @Enumerated(EnumType.STRING)
+    private Action action;
+
     // 이벤트 발생시 증감 포인트
     @Column(nullable = false)
-    private int pointChange;
+    private int transactionPoint;
 
     // 증감된 후 보유 포인트
     @Column(nullable = false)
-    private int pointCalCount;
+    private int totalPoint;
+
+    // 유저 UUID
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID userId;
+
+    // 리뷰 UUID
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID reviewId;
+
+    // 장소 UUID
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID placeId;
 
     // 이벤트 발생일시
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @CreationTimestamp
     private Timestamp eventEnrollDate;
 
-    // user 테이블 참조
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private User user;
 
-    // review 테이블 참조
-    @ManyToOne
-    @JoinColumn(name = "reviewId")
-    private Review review;
+    @Builder History(Event type, Action action, int transactionPoint, int totalPoint, User user, Review review, Place place) {
+        this.type = type;
+        this.action = action;
+        this.transactionPoint = transactionPoint;
+        this.totalPoint = totalPoint;
+        this.userId = user.getUserId();
+        this.reviewId = review.getReviewId();
+        this.placeId = place.getPlaceId();
+    }
+
+//    // user 테이블 참조
+//    @ManyToOne
+//    @JoinColumn(name = "userId")
+//    private User user;
+//
+//    // review 테이블 참조
+//    @ManyToOne
+//    @JoinColumn(name = "reviewId")
+//    private Review review;
 }

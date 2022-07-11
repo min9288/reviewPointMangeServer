@@ -13,8 +13,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -71,5 +70,11 @@ public class User{
         this.refreshToken = refreshToken;
     }
 
+    @Builder
+    public User(UUID userId, int point, int userLevel) {
+        this.userId = userId;
+        this.point = point;
+        this.userLevel = userLevel;
+    }
 
 }

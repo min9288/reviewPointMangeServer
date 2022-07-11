@@ -32,6 +32,7 @@
 
 - 포인트 별 레벨 구현
     - 레벨 승급 포인트 달성 시, 등급 업그레이드 및 포인트 회수로 인한 다운그레이드 기능 구현
+    - 0 LEVEL : 5 포인트 미만
     - 1 LEVEL : 5 포인트
     - 2 LEVEL : 40 포인트
     - 3 LEVEL : 100 포인트
@@ -41,21 +42,138 @@
 ## 3. 개발 요구사항
 - SQL( MySQL >= 5.7) 스키마 설계
     - 테이블과 인덱스에 대한 DDL 필요
-    - 포인트 부여 SQL 수행 시, 전체 테이블 스캔이 일어나지 않는 인덱스가 필요
 - REST API를 제공하는 서버 애플리케이션 구현
 
 <br/>
 
 ## 4. 기술 스택
-- Sping Boot
-- AWS RDS - MySQL(8.0)
-- AWS EC2
+- Spring Boot (API Server)
+- Spring Security (Security)
+- MySQL(8.0) (RDB)
+- JPA (ORM)
+- AWS EC2 (Infra)
+- AWS S3 (Store)
+- Postman(Documentation)
+- DBeaver (Database tool)
+- IntelliJ (Development tools)
 
 <br/>
 
-## 5. 개발 환경
-- IntelliJ
-- erdCloud
-- postman
-- DBeaver
+## 5. 가용 서버
+- 13.125.166.209:8080
+    - 위 서버로 테스트 진행해주시면 됩니다..!
+
+<br/>
+
+## 기능 및 사용방법
+
+<br/>
+🔍 회원가입 및 로그인
+
+> * 13.125.166.209:8080/api/sign/** <- 토큰 없이도 사용가능합니다.
+
+```bash 
+Post
+* 회원가입 : 13.125.166.209:8080/api/sign/register
+* 로그인 : 13.125.166.209:8080/api/sign/login
+* 엑세스 토큰 유효시간 : 30분
+* 재발행 토큰 유효기간 : 7일
+{
+    "userName" : "testda",
+    "userPw" : "qwer1234"
+}
+```
+<p align="center">
+<img src = "./img/join.png" width=45%>
+<img src = "./img/join.png" width=45%>
+</p>
+
+> * JWT 토큰을 통한 회원가입과 로그인을 구현하였습니다.
+> * Response 값에 나와있는 access 토큰을 url에서 사용해주시면됩니다.
+
+<br/>
+
+🔍 토큰 재발행
+
+```bash 
+Post
+* 토큰 재발행 : 13.125.166.209:8080/api/sign/register
+{
+    "accessToken" : "엑세스 토큰",
+    "refreshToken" : "리프레시 토큰"
+}
+```
+
+<p align="center">
+<img src = "./img/refreshToken.png">
+</p>
+
+
+> * 토큰 재발행 시, 이전 로그인할때 나온 Response 값(accessToken, refreshToken)으로 사용하시면 됩니다.
+
+<br/>
+
+🔍 엑세스 토큰 인증방법
+
+```bash 
+* 각 기능의 Headers 에서 Key값과 Value값을 넣어주세요
+* key : X-AUTH-TOKEN
+* value : access 토큰
+```
+
+<p align="center">
+<img src = "./img/authToken.png" >
+</p>
+
+
+
+<br/>
+
+🔍 내 회원정보 조회
+
+```bash 
+Get
+* 로그인 Response 값에서 userID 값을 주소에 붙여주세요 
+* 13.125.166.209:8080/api/sign/user/{userID}
+```
+
+<p align="center">
+<img src = "./img/userView.png" >
+</p>
+
+> * userId / userName / point(보유포인트) / userLevel (유저레벨) 확인 할 수 있습니다.
+
+<br/>
+
+🔍 장소 등록 및 조회
+
+```bash 
+Post 
+* 장소등록
+* 로그인 Response 값에서 userID 값을 주소에 붙여주세요 
+* 13.125.166.209:8080/api/place/add
+
+{
+    "placeName" : "장소명"
+}
+
+-------------------------------
+
+Get
+* 장소 전체 조회
+* 13.125.166.209:8080/api/place
+
+```
+<p align="center">
+<img src = "./img/addPlace.png" width=45%>
+<img src = "./img/getPlace.png" width=45%>
+</p>
+
+
+
+
+
+
+
+
 <br/>

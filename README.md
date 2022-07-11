@@ -56,5 +56,6 @@
 ## 5. 개발 환경
 - IntelliJ
 - erdCloud
-
+- postman
+- DBeaver
 <br/>

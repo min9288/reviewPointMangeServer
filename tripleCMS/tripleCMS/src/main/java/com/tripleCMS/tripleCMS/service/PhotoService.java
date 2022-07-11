@@ -1,11 +1,9 @@
 package com.tripleCMS.tripleCMS.service;
 
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.tripleCMS.tripleCMS.config.S3Uploader;
 import com.tripleCMS.tripleCMS.model.Attphoto;
 import com.tripleCMS.tripleCMS.model.Review;
 import com.tripleCMS.tripleCMS.repository.PhotoRepository;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;

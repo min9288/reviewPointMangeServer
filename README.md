@@ -65,7 +65,7 @@
 
 <br/>
 
-## 기능 및 사용방법
+## 6. 기능 및 사용방법
 
 <br/>
 🔍 회원가입 및 로그인
@@ -332,4 +332,95 @@ Put
 > * 진행하면 리뷰가 수정되며, 마찬가지로 Response 값 복사 붙여넣기 하면 포인트 반영됩니다.
 
 
+<br/>
 
+## 7. DDL
+
+<p align="center">
+<img src = "./img/ddl.png">
+</p>
+
+## 8. 패키지 구조
+
+```bash 
+├── chat								// 채팅
+│	├── controller 
+│	├── dto
+│	├── entity
+│	├── repository
+│   └── service
+├── common
+│	├── advice							// Exception에 대한 처리 
+│	├── dto 							// 공통적으로 사용되는 Dto
+│	├── EventListener 					// EventListener
+│	├── helper 							// 공통적으로사용되는 Helper 
+│	├── response 						// Response를 위한 Service 
+│   └── EntityDate.class 				// 시간 정보를 담는 Super 클래스
+├── config
+│	├── jwt 							// jwt 관련 설정
+│	├── redis							// redis 관련 설정
+│	├── security					    // security 관련 설정
+│	├── swagger							// swagger 관련 설정
+│	├── AsyncConfig.class 				// 비동기 설정 관련
+│	├── JasyptConfig.class 				// yml 암호화 설정 관련
+│	├── S3Config.class					// AWS S3 버켓 설정 관련
+│	├── WebMvcConfig.class 				// Cors 설정 관련
+│   └── .class 							// 시간 정보를 담는 Super 클래스
+├── member								// 회원
+│	├── controller 
+│	├── dto
+│	├── entity
+│	├── repository
+│   └── service
+├── message								// 쪽지
+│	├── controller 
+│	├── dto
+│	├── entity
+│	├── repository
+│   └── service
+├── notification						// 알림
+│	├── controller 
+│	├── dto
+│	├── entity
+│	├── repository
+│   └── service
+├── study								// 스터디 관련 
+├── ├── dto								// 스터디 공통 dto						
+│	├── study 							// 스터디
+│	|   ├── controller 							
+│	|   ├── dto 					
+│	|   ├── entity 					
+│	|   ├── repository 					
+│	|   ├── service 					
+│	├── studyarticle					// 스터디 게시글
+│	|   ├── controller 							
+│	|   ├── dto 					
+│	|   ├── entity 					
+│	|   ├── repository 					
+│	|   ├── service 
+│	├── studyboard						// 스터디 게시판
+│	|   ├── controller 							
+│	|   ├── dto 					
+│	|   ├── entity 					
+│	|   ├── repository 					
+│	|   ├── service 
+│	├── studycomment					// 스터디 댓글
+│	|   ├── controller 							
+│	|   ├── dto 					
+│	|   ├── entity 					
+│	|   ├── repository 					
+│	|   ├── service 
+│   └── studyjoin						// 스터디 참여
+│	|   ├── controller 							
+│	|   ├── dto 					
+│	|   ├── entity 					
+│	|   ├── repository 					
+│	|   ├── service 
+│   └── videoroom						// 스터디 화상회의
+│	|   ├── controller 							
+│	|   ├── dto 					
+│	|   ├── entity 					
+│	|   ├── repository 					
+│	|   ├── service 
+└──
+```

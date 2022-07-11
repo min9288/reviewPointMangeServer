@@ -47,10 +47,18 @@ public class S3Service {
         });
         return fileNameList;
     }
-
-    public void deleteFile(String fileName) {
+//    public void deleteFile(String fileName) {
+//        amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
+//    }
+    public void deleteFileJPG(String fileName) {
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
     }
+
+    public void deleteFilePNG(String fileName) {
+        amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
+    }
+
+
 
     // 파일명을 UUID로 난수화
     private String createFileName(String fileName) {

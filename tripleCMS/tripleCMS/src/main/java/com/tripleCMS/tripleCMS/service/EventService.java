@@ -89,6 +89,7 @@ public class EventService {
             user.setUserLevel(3);
         }
         review.setSavingPoint(countSavePoint);
+
         reviewRepository.save(review);
         userRepository.save(user);
 

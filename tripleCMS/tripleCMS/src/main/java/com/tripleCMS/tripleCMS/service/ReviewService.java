@@ -79,6 +79,7 @@ public class ReviewService {
                         .type(requestDto.getType())
                         .action(requestDto.getAction())
                         .content(requestDto.getContent())
+                        .photoCount(imageCount)
                         .userId(requestDto.getUserId())
                         .placeId(requestDto.getPlaceId())
                         .photoList(imageStrList)
@@ -130,6 +131,18 @@ public class ReviewService {
                 .reviewId(review.getReviewId())
                 .placeId(review.getPlaceId())
                 .build();
+
+        for(String image : imageList) {
+            String jpg = ".jpg";
+            String imageResultStr = image.concat(jpg);
+            s3Service.deleteFileJPG(imageResultStr);
+        }
+
+        for(String image : imageList) {
+            String png = ".png";
+            String imageResultStr = image.concat(png);
+            s3Service.deleteFilePNG(imageResultStr);
+        }
 
         return responseDto;
     }

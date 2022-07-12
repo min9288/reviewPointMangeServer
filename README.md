@@ -359,7 +359,7 @@ Put
 │	├── ReviewController.class 				// 리뷰 관련 
 │   └── SingController.class 				// 유저와 로그인 및 회원가입 관련 
 ├── dto
-│	├── requestDto
+│	├── requestDto                          
 │   │   ├── events
 │   │   │   └── EventReqeustDto.class
 │   │   ├── jwt
@@ -371,7 +371,7 @@ Put
 │   │   │   └── ReviewUpdateRequestDto.class
 │   │   └── user
 │   │       ├── UserLoginRequestDto.class
-│   │       └── UserRegisterRequestDto.class							// jwt 관련 설정
+│   │       └── UserRegisterRequestDto.class							
 │	└── responseDto	
 │       ├── events
 │       │   └── EventResponseDto.class
@@ -385,19 +385,19 @@ Put
 │       ├── review
 │       │   ├── ReviewDeleteResponseDto.class
 │       │   ├── ReviewGetResponseDto.class
-│       │   ├── ReviewResponseDto.class
+│       │   ├── ReviewResponseDto.class                     // 리뷰 등록 Response DTO
 │       │   └── ReviewUpdateResponseDto.class
 │       └── user
 │           ├── UserGetResponseDto.class
 │           ├── UserLoginResponseDto.class
 │           └── UserRegisterResponseDto.class
-├──	exception					// redis 관련 설정
+├──	exception					
 │	├── advice
-│	│   └── ExceptionAdvice				// custom exception 관련 설정
+│	│   └── ExceptionAdvice				                    // custom exception 관련 설정
 │	├── AuthenticationEntryPointException.class							
-│	├── CustomAccessDeniedHandler.class 				// 비동기 설정 관련
-│	├── CustomAuthenticationEntryPoint.class 				// yml 암호화 설정 관련
-│	├── InvalidRefreshTokenException.class					// AWS S3 버켓 설정 관련
+│	├── CustomAccessDeniedHandler.class 				      
+│	├── CustomAuthenticationEntryPoint.class 				
+│	├── InvalidRefreshTokenException.class					
 │	├── LoginFailureException.class
 │	├── PlaceAlreadyExistsException.class
 │	├── PlaceNotFoundException.class
@@ -405,32 +405,34 @@ Put
 │	├── UserIdAlreadyExistsException.class
 │	├── UserNotFoundException.class
 │	└──  WriterAlreadyExistsException.class
-├── model								        // 모델
-│	├── enumPackage
+├── model								                    
+│	├── enumPackage                                         // enum 패키지
 │	│   ├── Action.enum
 │	│   ├── Event.enum
 │	│   └── Role.enum
-│	├── Attphoto.class
-│	├── History.class
-│	├── Place.class
-│	├── Review.class
-│   └── User.class
-├── repository								// 
-│	├── HistoryRepository.interface 
-│	├── PhotoRepository.interface 
-│	├── PlaceRepository.interface 
-│	├── ReviewRepository.interface 
-│   └── UserRepository.interface 
-├── service						// 알림
-│	├── EventService.class
-│	├── HistoryService.class 
-│	├── PhotoService.class 
-│	├── PlaceService.class 
-│	├── ResponseService.class  
-│	├── ReviewService.class
-│	├── S3Service.class
-│	└── SignService.class
-├── s
-│	|   ├── service 
-└──
+│	├── Attphoto.class                                      // 리뷰 첨부사진 모델
+│	├── History.class                                       // 이벤트 발생 이력 모델
+│	├── Place.class                                         // 여행 장소 모델
+│	├── Review.class                                        // 리뷰 모델
+│   └── User.class                                          // 유저 모델
+├── repository								
+│	├── HistoryRepository.interface                         // History DAO
+│	├── PhotoRepository.interface                           // Attphoto DAO
+│	├── PlaceRepository.interface                           // Place DAO
+│	├── ReviewRepository.interface                          // Review DAO
+│   └── UserRepository.interface                            // User DAO
+├── service						
+│	├── EventService.class                                  // 이벤트 서비스
+│	├── HistoryService.class                                // 이벤트 발생 이력 관련 서비스
+│	├── PhotoService.class                                  // 첨부사진 관련 서비스
+│	├── PlaceService.class                                  // 여행 장소 관련 서비스 
+│	├── ResponseService.class                               // ResponseDto Result 관련 서비스 
+│	├── ReviewService.class                                 // 리뷰 서비스
+│	├── S3Service.class                                     // S3 관련 서비스
+│	└── SignService.class                                   // 유저 관련 서비스
+├── result
+│	├── MultipleResult.class                                // 다중 결과 값 Result
+│	├── Result.class
+│	└── SingleResult.class                                  // 단일 결과 값 Result
+│ 
 ```

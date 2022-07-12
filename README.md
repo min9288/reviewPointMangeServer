@@ -394,7 +394,7 @@ Put
 ├──	exception					// redis 관련 설정
 │	├── advice
 │	│   └── ExceptionAdvice				// custom exception 관련 설정
-│	├── AuthenticationEntryPointException.class							// swagger 관련 설정
+│	├── AuthenticationEntryPointException.class							
 │	├── CustomAccessDeniedHandler.class 				// 비동기 설정 관련
 │	├── CustomAuthenticationEntryPoint.class 				// yml 암호화 설정 관련
 │	├── InvalidRefreshTokenException.class					// AWS S3 버켓 설정 관련
@@ -415,7 +415,7 @@ Put
 │	├── Place.class
 │	├── Review.class
 │   └── User.class
-├── repository								// 쪽지
+├── repository								// 
 │	├── HistoryRepository.interface 
 │	├── PhotoRepository.interface 
 │	├── PlaceRepository.interface 
@@ -430,43 +430,7 @@ Put
 │	├── ReviewService.class
 │	├── S3Service.class
 │	└── SignService.class
-├── study								// 스터디 관련 
-├── ├── dto								// 스터디 공통 dto						
-│	├── study 							// 스터디
-│	|   ├── controller 							
-│	|   ├── dto 					
-│	|   ├── entity 					
-│	|   ├── repository 					
-│	|   ├── service 					
-│	├── studyarticle					// 스터디 게시글
-│	|   ├── controller 							
-│	|   ├── dto 					
-│	|   ├── entity 					
-│	|   ├── repository 					
-│	|   ├── service 
-│	├── studyboard						// 스터디 게시판
-│	|   ├── controller 							
-│	|   ├── dto 					
-│	|   ├── entity 					
-│	|   ├── repository 					
-│	|   ├── service 
-│	├── studycomment					// 스터디 댓글
-│	|   ├── controller 							
-│	|   ├── dto 					
-│	|   ├── entity 					
-│	|   ├── repository 					
-│	|   ├── service 
-│   └── studyjoin						// 스터디 참여
-│	|   ├── controller 							
-│	|   ├── dto 					
-│	|   ├── entity 					
-│	|   ├── repository 					
-│	|   ├── service 
-│   └── videoroom						// 스터디 화상회의
-│	|   ├── controller 							
-│	|   ├── dto 					
-│	|   ├── entity 					
-│	|   ├── repository 					
+├── s
 │	|   ├── service 
 └──
 ```

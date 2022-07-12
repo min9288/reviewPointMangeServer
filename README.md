@@ -343,47 +343,93 @@ Put
 ## 8. 패키지 구조
 
 ```bash 
-├── chat								// 채팅
-│	├── controller 
-│	├── dto
-│	├── entity
-│	├── repository
-│   └── service
-├── common
-│	├── advice							// Exception에 대한 처리 
-│	├── dto 							// 공통적으로 사용되는 Dto
-│	├── EventListener 					// EventListener
-│	├── helper 							// 공통적으로사용되는 Helper 
-│	├── response 						// Response를 위한 Service 
-│   └── EntityDate.class 				// 시간 정보를 담는 Super 클래스
-├── config
-│	├── jwt 							// jwt 관련 설정
-│	├── redis							// redis 관련 설정
-│	├── security					    // security 관련 설정
-│	├── swagger							// swagger 관련 설정
-│	├── AsyncConfig.class 				// 비동기 설정 관련
-│	├── JasyptConfig.class 				// yml 암호화 설정 관련
-│	├── S3Config.class					// AWS S3 버켓 설정 관련
-│	├── WebMvcConfig.class 				// Cors 설정 관련
-│   └── .class 							// 시간 정보를 담는 Super 클래스
-├── member								// 회원
-│	├── controller 
-│	├── dto
-│	├── entity
-│	├── repository
-│   └── service
-├── message								// 쪽지
-│	├── controller 
-│	├── dto
-│	├── entity
-│	├── repository
-│   └── service
-├── notification						// 알림
-│	├── controller 
-│	├── dto
-│	├── entity
-│	├── repository
-│   └── service
+├── config                      
+|   ├── AwsConfig.class                       // Aws 버켓 설정 관련
+|   └──	jwt							          // Jwt 관련
+│       ├── JwtAuthenticationFilter.class     // Jwt Filter chain
+│	    ├── JwtTokenProvider.class            // JwtTokenProvider
+│	    ├── SecurityConfig.class              // Jwt Config
+│	    ├── TripleUserDetails.class           // Custom UserDetails
+│       └── TripleUserDetailsService.class    // Custom UserDetailsService
+├── controller      
+│	├── EventController.class			    // 이벤트 발생 관련 (포인트 처리)
+│	├── ExceptionController.class 			// Exception 관련
+│	├── HistoryController.class 			// 이벤트 발생 이력 관련
+│	├── PlaceController.class				// 장소 관련
+│	├── ReviewController.class 				// 리뷰 관련 
+│   └── SingController.class 				// 유저와 로그인 및 회원가입 관련 
+├── dto
+│	├── requestDto
+│   │   ├── events
+│   │   │   └── EventReqeustDto.class
+│   │   ├── jwt
+│   │   │   └── TokenRequestDto.class
+│   │   ├── place
+│   │   │   └── PlaceAddRequestDto.class
+│   │   ├── review
+│   │   │   ├── ReviewAddRequestDto.class
+│   │   │   └── ReviewUpdateRequestDto.class
+│   │   └── user
+│   │       ├── UserLoginRequestDto.class
+│   │       └── UserRegisterRequestDto.class							// jwt 관련 설정
+│	└── responseDto	
+│       ├── events
+│       │   └── EventResponseDto.class
+│       ├── history
+│       │   └── HistoryResponseDto.class
+│       ├── jwt
+│       │   └── TokenResponseDto.class
+│       ├── place
+│       │   ├── PlaceAddResponseDto.class
+│       │   └── PlaceFindAllResponseDto.class
+│       ├── review
+│       │   ├── ReviewDeleteResponseDto.class
+│       │   ├── ReviewGetResponseDto.class
+│       │   ├── ReviewResponseDto.class
+│       │   └── ReviewUpdateResponseDto.class
+│       └── user
+│           ├── UserGetResponseDto.class
+│           ├── UserLoginResponseDto.class
+│           └── UserRegisterResponseDto.class
+├──	exception					// redis 관련 설정
+│	├── advice
+│	│   └── ExceptionAdvice				// custom exception 관련 설정
+│	├── AuthenticationEntryPointException.class							// swagger 관련 설정
+│	├── CustomAccessDeniedHandler.class 				// 비동기 설정 관련
+│	├── CustomAuthenticationEntryPoint.class 				// yml 암호화 설정 관련
+│	├── InvalidRefreshTokenException.class					// AWS S3 버켓 설정 관련
+│	├── LoginFailureException.class
+│	├── PlaceAlreadyExistsException.class
+│	├── PlaceNotFoundException.class
+│	├── ReviewNotFoundException.class
+│	├── UserIdAlreadyExistsException.class
+│	├── UserNotFoundException.class
+│	└──  WriterAlreadyExistsException.class
+├── model								        // 모델
+│	├── enumPackage
+│	│   ├── Action.enum
+│	│   ├── Event.enum
+│	│   └── Role.enum
+│	├── Attphoto.class
+│	├── History.class
+│	├── Place.class
+│	├── Review.class
+│   └── User.class
+├── repository								// 쪽지
+│	├── HistoryRepository.interface 
+│	├── PhotoRepository.interface 
+│	├── PlaceRepository.interface 
+│	├── ReviewRepository.interface 
+│   └── UserRepository.interface 
+├── service						// 알림
+│	├── EventService.class
+│	├── HistoryService.class 
+│	├── PhotoService.class 
+│	├── PlaceService.class 
+│	├── ResponseService.class  
+│	├── ReviewService.class
+│	├── S3Service.class
+│	└── SignService.class
 ├── study								// 스터디 관련 
 ├── ├── dto								// 스터디 공통 dto						
 │	├── study 							// 스터디

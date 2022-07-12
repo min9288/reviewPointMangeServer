@@ -1,6 +1,7 @@
 package com.tripleCMS.tripleCMS.service;
 
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.tripleCMS.tripleCMS.config.S3Uploader;
 import com.tripleCMS.tripleCMS.model.Attphoto;
 import com.tripleCMS.tripleCMS.model.Review;
 import com.tripleCMS.tripleCMS.repository.PhotoRepository;

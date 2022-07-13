@@ -49,7 +49,7 @@
 ## 4. 기술 스택
 - Spring Boot (API Server)
 - Spring Security (Security)
-- MySQL(8.0) (RDB)
+- MySQL(8.0 / AWS_RDS) (RDB)
 - JPA (ORM)
 - AWS EC2 (Infra)
 - AWS S3 (Store)

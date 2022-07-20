@@ -39,14 +39,7 @@
 
 <br/>
 
-## 3. 개발 요구사항
-- SQL( MySQL >= 5.7) 스키마 설계
-    - 테이블과 인덱스에 대한 DDL 필요
-- REST API를 제공하는 서버 애플리케이션 구현
-
-<br/>
-
-## 4. 기술 스택
+## 3. 기술 스택
 - Spring Boot (API Server)
 - Spring Security (Security)
 - ~MySQL(8.0 / AWS_RDS) (RDB)~ - 과금 문제로 네이버 클라우드 DB로 변경
@@ -61,7 +54,7 @@
 
 <br/>
 
-## 5. 가용 서버
+## 4. 가용 서버
 - 13.125.166.209:8080
     - 위 서버로 테스트 진행해주시면 됩니다..!
 
@@ -335,13 +328,13 @@ Put
 
 <br/>
 
-## 7. DDL
+## 6. DDL
 
 <p align="center">
 <img src = "./img/ddl.png">
 </p>
 
-## 8. 패키지 구조
+## 7. 패키지 구조
 
 ```bash 
 ├── config                      
@@ -350,8 +343,8 @@ Put
 │       ├── JwtAuthenticationFilter.class     // Jwt Filter chain
 │	    ├── JwtTokenProvider.class            // JwtTokenProvider
 │	    ├── SecurityConfig.class              // Jwt Config
-│	    ├── TripleUserDetails.class           // Custom UserDetails
-│       └── TripleUserDetailsService.class    // Custom UserDetailsService
+│	    ├── ReviewUserDetails.class           // Custom UserDetails
+│       └── ReviewUserDetailsService.class    // Custom UserDetailsService
 ├── controller      
 │	├── EventController.class			    // 이벤트 발생 관련 (포인트 처리)
 │	├── ExceptionController.class 			// Exception 관련

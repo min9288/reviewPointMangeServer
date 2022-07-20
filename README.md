@@ -15,7 +15,7 @@
             - 1자 이상 텍스트 작성 : 1점
         - 글과 사진이 있는 리뷰 작성 <b>2점</b> 적립 
             - 1자 이상 텍스트 + 1장 이상 사진 : 2점
-        - ~글만 있는 리뷰를 수정하여 사진을 추가할 시, 1점 추가 적립~ - 다시 확인해 보니 구현이 안 되어있습니다.
+        - 글만 있는 리뷰를 수정하여 사진을 추가할 시, 1점 추가 적립
         - 리뷰가 없는 여행장소에 최초 리뷰 작성 시 <b>보너스 점수 1점</b> 추가 적립
             - 여행장소에 사용자 A가 최초리뷰 작성 후 삭제하고, 삭제된 이후 사용자 B가 리뷰를 작성하면 B에게 보너스 점수 부여
             - [trouble case] 사용자 A가 최초리뷰를 삭제하는데 <b>삭제되기 이전에 사용자 B가 리뷰를 작성하면</b> 최초리뷰로 인정되지 않고 보너스 점수가 부여 안됨
@@ -49,9 +49,11 @@
 ## 4. 기술 스택
 - Spring Boot (API Server)
 - Spring Security (Security)
-- MySQL(8.0 / AWS_RDS) (RDB)
+- ~MySQL(8.0 / AWS_RDS) (RDB)~ - 과금 문제로 네이버 클라우드 DB로 변경
+- MySQL(8.0 / Naver Cloud DB) (RDB)
 - JPA (ORM)
-- AWS EC2 (Infra)
+- ~AWS EC2 (Infra)~ - 과금 문제로 네이버 클라우드 서버로 변경
+- Naver Cloud Server (Infra)
 - AWS S3 (Store)
 - Postman(Documentation)
 - DBeaver (Database tool)

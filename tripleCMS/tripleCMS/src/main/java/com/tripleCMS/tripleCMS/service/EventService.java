@@ -115,8 +115,6 @@ public class EventService {
 
     }
 
-    // 이력 수정 후 포인트 적립 또는 회수 프로세스
-    @Transactional
     public EventResponseDto modEventService(EventReqeustDto reqeustDto) {
         Review review = findByReview(reqeustDto.getReviewId()); // 작성 리뷰
         User user = findUserById(reqeustDto.getUserId()); // 리뷰 수정 자
@@ -127,32 +125,24 @@ public class EventService {
 
         int updatePhotoCount = reqeustDto.getAttachedPhotoIds().size(); // 수정 후 남아있는 사진 수
 
-        // 수정한 이미지 수에 따라 포인트 적립 또는 회수
         if(photoCount > 0) {
-            if (updatePhotoCount == 0) {
+            if(updatePhotoCount == 0) {
                 transactionPoint -= 1;
                 userPoint -= 1;
                 user.setPoint(userPoint);
-            }
-        } else if (photoCount == 0) {
-            if(updatePhotoCount > 0){
-                transactionPoint += 1;
-                userPoint += 1;
-                user.setPoint(userPoint);
+
+                if(0 == userPoint || userPoint < 5) {
+                    user.setUserLevel(0);
+                } else if(5 <= userPoint ||  userPoint <= 7 ){
+                    user.setUserLevel(1);
+                } else if (40 <= userPoint || userPoint <= 42) {
+                    user.setUserLevel(2);
+                } else if (100 <= userPoint || userPoint <= 102) {
+                    user.setUserLevel(3);
+                }
+                userRepository.save(user);
             }
         }
-
-        if(0 == userPoint || userPoint < 5) {
-            user.setUserLevel(0);
-        } else if(5 <= userPoint ||  userPoint <= 7 ){
-            user.setUserLevel(1);
-        } else if (40 <= userPoint || userPoint <= 42) {
-            user.setUserLevel(2);
-        } else if (100 <= userPoint || userPoint <= 102) {
-            user.setUserLevel(3);
-        }
-        userRepository.save(user);
-
 
         // 이력 등록 프로세스
         History history = historyRepository.save(

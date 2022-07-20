@@ -55,8 +55,9 @@
 <br/>
 
 ## 4. 가용 서버
-- 13.125.166.209:8080
-    - 위 서버로 테스트 진행해주시면 됩니다..!
+- 49.50.162.31:8080
+    - 위 서버로 테스트 진행해주시면 됩니다.
+    - 아래 사진 속 URL은 AWS EC2 사용할 때의 URL 입니다. (현재 네이버 클라우드 사용 중)
 
 <br/>
 
@@ -65,12 +66,12 @@
 <br/>
 🔍 회원가입 및 로그인
 
-> * 13.125.166.209:8080/api/sign/** <- 토큰 없이도 사용가능합니다.
+> * 49.50.162.31:8080/api/sign/** <- 토큰 없이도 사용가능합니다.
 
 ```bash 
 Post
-* 회원가입 : 13.125.166.209:8080/api/sign/register
-* 로그인 : 13.125.166.209:8080/api/sign/login
+* 회원가입 : 49.50.162.31:8080/api/sign/register
+* 로그인 : 49.50.162.31:8080/api/sign/login
 * 엑세스 토큰 유효시간 : 30분
 * 재발행 토큰 유효기간 : 7일
 {
@@ -92,7 +93,7 @@ Post
 
 ```bash 
 Post
-* 토큰 재발행 : 13.125.166.209:8080/api/sign/register
+* 토큰 재발행 : 49.50.162.31:8080/api/sign/register
 {
     "accessToken" : "엑세스 토큰",
     "refreshToken" : "리프레시 토큰"
@@ -129,7 +130,7 @@ Post
 ```bash 
 Get
 * 로그인 Response 값에서 userID 값을 주소에 붙여주세요 
-* 13.125.166.209:8080/api/sign/user/유저아이디
+* 49.50.162.31:8080/api/sign/user/유저아이디
 ```
 
 <p align="center">
@@ -146,7 +147,7 @@ Get
 Post 
 * 장소등록
 * 로그인 Response 값에서 userID 값을 주소에 붙여주세요 
-* 13.125.166.209:8080/api/place/add
+* 49.50.162.31:8080/api/place/add
 
 {
     "placeName" : "장소명"
@@ -156,7 +157,7 @@ Post
 
 Get
 * 장소 전체 조회
-* 13.125.166.209:8080/api/place
+* 49.50.162.31:8080/api/place
 
 ```
 <p align="center">
@@ -175,7 +176,7 @@ Get
 ```bash 
 Post 
 * 사진없는 리뷰 등록
-* 13.125.166.209:8080/api/review/add
+* 49.50.162.31:8080/api/review/add
 
 {
 "type": "REVIEW",
@@ -190,7 +191,7 @@ Post
 
 Post
 * 이벤트
-* 13.125.166.209:8080/api/events
+* 49.50.162.31:8080/api/events
 
 {
     "type": "REVIEW",
@@ -221,7 +222,7 @@ Post
 
 ```bash 
 Get
-* 13.125.166.209:8080/api/history/유저아이디
+* 49.50.162.31:8080/api/history/유저아이디
 
 ```
 
@@ -238,9 +239,9 @@ Get
 
 ```bash 
 Post
-* 13.125.166.209:8080/api/review/addAttPhoto
+* 49.50.162.31:8080/api/review/addAttPhoto
 * form-data 를 사용했습니다.
-* 이번 케이스는 사진으로 확인 부탁드립니다..!
+* 이번 케이스는 사진으로 확인 부탁드립니다.
 * key : requestDto / 
 * value : {
             "type": "REVIEW",
@@ -269,7 +270,7 @@ Post
 🔍 등록한 리뷰 조회
 ```bash 
 Get
-* 13.125.166.209:8080/api/review/유저아이디
+* 49.50.162.31:8080/api/review/유저아이디
 
 ```
 
@@ -284,7 +285,7 @@ Get
 🔍 등록한 리뷰 삭제
 ```bash 
 Delete
-* 13.125.166.209:8080/api/review/리뷰아이디
+* 49.50.162.31:8080/api/review/리뷰아이디
 
 ```
 
@@ -302,9 +303,9 @@ Delete
 🔍 등록한 리뷰 수정
 ```bash 
 Put
-* 13.125.166.209:8080/api/review/update
+* 49.50.162.31:8080/api/review/update
 * 수정 기능은 미비한 부분으로, 기존 등록과 삭제와 다르게 진행해야합니다.
-* 먼저, 유저의 리뷰를 조회 후 수정할 리뷰 값을 복사해주세요   (Get)(13.125.166.209:8080/api/review/유저아이디)
+* 먼저, 유저의 리뷰를 조회 후 수정할 리뷰 값을 복사해주세요   (Get)(49.50.162.31:8080/api/review/유저아이디)
 * 수정 URL에서 복사한 값을 붙여넣는데, 수정해야될 값 중에 "attachedPhotoIds" 값이 null 이라면, 아래 테스트케이스와 같이 "attachedPhotoIds" value 값을 바꾼뒤 진행해주세요.
 * 수정 파트는 미완성으로, S3 과 연동이 안되서 사진추가도 할 수 없습니다..
 * 다만, "[사진Id, 사진Id]" (문자열이라 대괄호옆 쌍따옴표 붙여주셔야 됩니다) 이런식으로는 변경 할 수 있습니다.
@@ -333,6 +334,8 @@ Put
 ```bash 
 ├── config                      
 |   ├── AwsConfig.class                       // Aws 버켓 설정 관련
+|   ├── JasyptConfig.class                    // yml 암호화 설정 관련
+|   ├── S3Uploader.class                      // S3 업로드 설정 관련
 |   └──	jwt							          // Jwt 관련
 │       ├── JwtAuthenticationFilter.class     // Jwt Filter chain
 │	    ├── JwtTokenProvider.class            // JwtTokenProvider

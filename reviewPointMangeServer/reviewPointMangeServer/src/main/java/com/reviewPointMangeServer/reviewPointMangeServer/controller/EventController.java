@@ -1,7 +1,7 @@
 package com.reviewPointMangeServer.reviewPointMangeServer.controller;
 
-import com.reviewPointMangeServer.reviewPointMangeServer.dto.requestDto.events.EventReqeustDto;
-import com.reviewPointMangeServer.reviewPointMangeServer.dto.responseDto.events.EventResponseDto;
+import com.reviewPointMangeServer.reviewPointMangeServer.dto.requestDTO.event.EventReqeustDto;
+import com.reviewPointMangeServer.reviewPointMangeServer.dto.responseDTO.events.EventResponseDto;
 import com.reviewPointMangeServer.reviewPointMangeServer.service.EventService;
 import com.reviewPointMangeServer.reviewPointMangeServer.service.ResponseService;
 import lombok.RequiredArgsConstructor;

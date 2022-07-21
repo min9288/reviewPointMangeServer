@@ -1,8 +1,8 @@
 package com.reviewPointMangeServer.reviewPointMangeServer.config.jwt;
 
 import com.reviewPointMangeServer.reviewPointMangeServer.exception.UserNotFoundException;
-import com.reviewPointMangeServer.reviewPointMangeServer.model.User;
-import com.reviewPointMangeServer.reviewPointMangeServer.repository.UserRepository;
+import com.reviewPointMangeServer.reviewPointMangeServer.user.model.User;
+import com.reviewPointMangeServer.reviewPointMangeServer.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

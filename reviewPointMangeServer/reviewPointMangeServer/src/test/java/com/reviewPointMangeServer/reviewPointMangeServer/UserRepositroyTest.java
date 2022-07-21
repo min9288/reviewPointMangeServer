@@ -1,6 +1,6 @@
 package com.reviewPointMangeServer.reviewPointMangeServer;
 
-import com.reviewPointMangeServer.reviewPointMangeServer.repository.UserRepository;
+import com.reviewPointMangeServer.reviewPointMangeServer.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;

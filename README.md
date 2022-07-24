@@ -51,7 +51,7 @@
 - AWS S3 (Store)
 - Postman(Documentation)
 - DBeaver (Database tool)
-- IntelliJ (Development tools)
+- IntelliJ (Development tool)
 
 <br/>
 

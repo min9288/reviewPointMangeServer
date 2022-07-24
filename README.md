@@ -261,7 +261,7 @@ Post
 
 <p align="center">
 <img src = "./img/addPhotoReview.png">
-<img src = "./img/s3.png">
+<img src = "./img/.png">
 </p>
 
 > * 사진리뷰를 등록하면, 첨부사진의 S3에 업로드 됩니다.
@@ -294,7 +294,7 @@ Delete
 
 <p align="center">
 <img src = "./img/deleteReview.png">
-<img src = "./img/s3Delete.png">
+<img src = "./img/.png">
 </p>
 
 > * 진행하면 리뷰가 삭제되면 올렸던 사진들도 모두 삭제되고 s3에도 반영됩니다.

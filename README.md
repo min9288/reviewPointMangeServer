@@ -261,7 +261,7 @@ Post
 
 <p align="center">
 <img src = "./img/addPhotoReview.png">
-<img src = "./img/.png">
+<img src = "./img/s3.png">
 </p>
 
 > * 사진리뷰를 등록하면, 첨부사진의 S3에 업로드 됩니다.

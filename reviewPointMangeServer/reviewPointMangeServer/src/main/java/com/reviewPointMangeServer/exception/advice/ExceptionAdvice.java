@@ -1,7 +1,7 @@
 package com.reviewPointMangeServer.exception.advice;
 
 import com.reviewPointMangeServer.exception.*;
-import com.reviewPointMangeServer.service.ResponseService;
+import com.reviewPointMangeServer.domain.service.response.ResponseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;

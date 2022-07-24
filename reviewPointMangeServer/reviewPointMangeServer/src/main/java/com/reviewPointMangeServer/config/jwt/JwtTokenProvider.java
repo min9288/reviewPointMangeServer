@@ -1,6 +1,6 @@
 package com.reviewPointMangeServer.config.jwt;
 
-import com.reviewPointMangeServer.repository.UserRepository;
+import com.reviewPointMangeServer.domain.repository.user.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

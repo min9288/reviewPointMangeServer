@@ -1,5 +1,5 @@
 # reviewPointMangeServer
-> 여행 리뷰 서버 애플리케이션 구현 프로젝트 입니다.
+> 장소 리뷰 서버 애플리케이션 구현 프로젝트 입니다.
 
 > 스프링부트와 JPA, JWT를 적용한 REST API 서버를 제작하기 위해 만들었습니다.
 
@@ -82,7 +82,7 @@ Post
 ```
 <p align="center">
 <img src = "./img/join.png" width=45%>
-<img src = "./img/join.png" width=45%>
+<img src = "./img/login.png" width=45%>
 </p>
 
 > * JWT 토큰을 통한 회원가입과 로그인을 구현하였습니다.
@@ -196,7 +196,7 @@ Post
 
 {
     "type": "REVIEW",
-    "action": "ADD",
+    "action": "ADD",    // "MOD", "DELETE"
     "reviewId": "fefe829a-7c09-4f06-834e-b8e56f3341cc",
     "content": "좋아요!!",
     "attachedPhotoIds": [],
@@ -215,7 +215,9 @@ Post
 > * 리뷰 등록 시 리뷰는 등록되고 포인트는 적립 되지 않습니다. 
 > * 이벤트를 통해서 포인트가 적립됩니다.
 > * 이벤트 Response 값을 통해 포인트 적립을 확인 할 수 있습니다.
-> * 글 리뷰 1점 / 글 + 사진 리뷰 2점 / 여행장소 최초 리뷰 1점 추가
+> * ADD : 글 리뷰 1점 / 글 + 사진 리뷰 2점 / 여행장소 최초 리뷰 1점 추가
+> * DELETE : 포인트 전체 회수
+> * MOD :  첨부사진 전체 삭제하면, 전에 받았던 사진첨부 포인트 1점 회수
 
 <br/>
 
@@ -243,7 +245,7 @@ Post
 * 49.50.162.31:8080/api/review/addAttPhoto
 * form-data 를 사용했습니다.
 * 이번 케이스는 사진으로 확인 부탁드립니다.
-* key : requestDto / 
+* key : requestDto  
 * value : {
             "type": "REVIEW",
             "action": "ADD",
@@ -263,7 +265,7 @@ Post
 </p>
 
 > * 사진리뷰를 등록하면, 첨부사진의 S3에 업로드 됩니다.
-> * 이전 이벤트 등록과 동일하게 Response 값 그대로 복사해서 붙여넣어 주세요..!
+> * 이전 이벤트 등록과 동일하게 Response 값 그대로 복사해서 붙여넣어 주세요!
 > * 마찬가지로, 이벤트 등록 후 Response 값에서 트랜잭션 내용을 확인 할 수 있습니다.
 
 <br/>
@@ -326,6 +328,7 @@ Put
 </p>
 
 > * 진행하면 리뷰가 수정되며, 마찬가지로 Response 값 복사 붙여넣기 하면 포인트 반영됩니다.
+> * 첨부했던 사진을 모두 삭제하면, 전에 지급 받았던 사진첨부 포인트 1점이 회수 됩니다.
 
 
 <br/>
@@ -344,12 +347,12 @@ Put
 │	    ├── ReviewUserDetails.class           // Custom UserDetails
 │       └── ReviewUserDetailsService.class    // Custom UserDetailsService
 ├── controller      
-│	├── EventController.class			    // 이벤트 발생 관련 (포인트 처리)
-│	├── ExceptionController.class 			// Exception 관련
-│	├── HistoryController.class 			// 이벤트 발생 이력 관련
-│	├── PlaceController.class				// 장소 관련
-│	├── ReviewController.class 				// 리뷰 관련 
-│   └── SingController.class 				// 유저와 로그인 및 회원가입 관련 
+│	├── EventController.class			      // 이벤트 발생 관련 (포인트 처리)
+│	├── ExceptionController.class 			  // Exception 관련
+│	├── HistoryController.class 			  // 이벤트 발생 이력 관련
+│	├── PlaceController.class				  // 장소 관련
+│	├── ReviewController.class 				  // 리뷰 관련 
+│   └── SingController.class 				  // 유저와 로그인 및 회원가입 관련 
 ├── dto
 │	├── requestDto                          
 │   │   ├── events
@@ -397,7 +400,7 @@ Put
 │	├── UserIdAlreadyExistsException.class
 │	├── UserNotFoundException.class
 │	└──  WriterAlreadyExistsException.class
-├── model								                    
+├── entity								                    
 │	├── enumPackage                                         // enum 패키지
 │	│   ├── Action.enum
 │	│   ├── Event.enum

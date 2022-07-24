@@ -1,6 +1,6 @@
 # reviewPointMangeServer
 > 장소 리뷰 서버 애플리케이션 구현 프로젝트 입니다.
-
+> 
 > 스프링부트와 JPA, JWT를 적용한 REST API 서버를 제작하기 위해 만들었습니다.
 
 <br/>
@@ -51,7 +51,7 @@
 - AWS S3 (Store)
 - Postman(Documentation)
 - DBeaver (Database tool)
-- IntelliJ (Development tools)
+- IntelliJ (Development tool)
 
 <br/>
 
@@ -380,7 +380,7 @@ Put
 │       ├── review
 │       │   ├── ReviewDeleteResponseDto.class
 │       │   ├── ReviewGetResponseDto.class
-│       │   ├── ReviewResponseDto.class                     // 리뷰 등록 Response DTO
+│       │   ├── ReviewResponseDto.class                     
 │       │   └── ReviewUpdateResponseDto.class
 │       └── user
 │           ├── UserGetResponseDto.class

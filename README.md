@@ -344,12 +344,12 @@ Put
 │	    ├── ReviewUserDetails.class           // Custom UserDetails
 │       └── ReviewUserDetailsService.class    // Custom UserDetailsService
 ├── controller      
-│	├── EventController.class			    // 이벤트 발생 관련 (포인트 처리)
-│	├── ExceptionController.class 			// Exception 관련
-│	├── HistoryController.class 			// 이벤트 발생 이력 관련
-│	├── PlaceController.class				// 장소 관련
-│	├── ReviewController.class 				// 리뷰 관련 
-│   └── SingController.class 				// 유저와 로그인 및 회원가입 관련 
+│	├── EventController.class			      // 이벤트 발생 관련 (포인트 처리)
+│	├── ExceptionController.class 			  // Exception 관련
+│	├── HistoryController.class 			  // 이벤트 발생 이력 관련
+│	├── PlaceController.class				  // 장소 관련
+│	├── ReviewController.class 				  // 리뷰 관련 
+│   └── SingController.class 				  // 유저와 로그인 및 회원가입 관련 
 ├── dto
 │	├── requestDto                          
 │   │   ├── events

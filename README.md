@@ -397,7 +397,7 @@ Put
 │	├── UserIdAlreadyExistsException.class
 │	├── UserNotFoundException.class
 │	└──  WriterAlreadyExistsException.class
-├── model								                    
+├── entity								                    
 │	├── enumPackage                                         // enum 패키지
 │	│   ├── Action.enum
 │	│   ├── Event.enum

@@ -380,7 +380,7 @@ Put
 │       ├── review
 │       │   ├── ReviewDeleteResponseDto.class
 │       │   ├── ReviewGetResponseDto.class
-│       │   ├── ReviewResponseDto.class                     // 리뷰 등록 Response DTO
+│       │   ├── ReviewResponseDto.class                     
 │       │   └── ReviewUpdateResponseDto.class
 │       └── user
 │           ├── UserGetResponseDto.class

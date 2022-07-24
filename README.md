@@ -294,7 +294,7 @@ Delete
 
 <p align="center">
 <img src = "./img/deleteReview.png">
-<img src = "./img/.png">
+<img src = "./img/s3Delete.png">
 </p>
 
 > * 진행하면 리뷰가 삭제되면 올렸던 사진들도 모두 삭제되고 s3에도 반영됩니다.

@@ -82,7 +82,7 @@ Post
 ```
 <p align="center">
 <img src = "./img/join.png" width=45%>
-<img src = "./img/join.png" width=45%>
+<img src = "./img/.png" width=45%>
 </p>
 
 > * JWT 토큰을 통한 회원가입과 로그인을 구현하였습니다.

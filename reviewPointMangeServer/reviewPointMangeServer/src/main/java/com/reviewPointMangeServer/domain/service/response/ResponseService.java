@@ -2,9 +2,9 @@ package com.reviewPointMangeServer.domain.service.response;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import result.MultipleResult;
-import result.Result;
-import result.SingleResult;
+import com.reviewPointMangeServer.domain.result.MultipleResult;
+import com.reviewPointMangeServer.domain.result.Result;
+import com.reviewPointMangeServer.domain.result.SingleResult;
 
 import java.util.List;
 

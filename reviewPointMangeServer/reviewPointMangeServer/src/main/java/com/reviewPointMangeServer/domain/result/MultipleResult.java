@@ -1,4 +1,4 @@
-package result;
+package com.reviewPointMangeServer.domain.result;
 
 import lombok.Data;
 

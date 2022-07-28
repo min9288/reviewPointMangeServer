@@ -12,7 +12,7 @@ import com.reviewPointMangeServer.domain.dto.responseDTO.user.UserRegisterRespon
 import com.reviewPointMangeServer.domain.service.response.ResponseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import result.SingleResult;
+import com.reviewPointMangeServer.domain.result.SingleResult;
 
 import javax.validation.Valid;
 import java.util.UUID;

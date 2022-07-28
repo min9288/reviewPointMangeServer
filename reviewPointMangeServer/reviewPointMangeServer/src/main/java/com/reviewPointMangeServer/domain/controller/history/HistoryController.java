@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import result.MultipleResult;
+import com.reviewPointMangeServer.domain.result.MultipleResult;
 
 import java.util.UUID;
 

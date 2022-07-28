@@ -7,8 +7,8 @@ import com.reviewPointMangeServer.domain.service.place.PlaceService;
 import com.reviewPointMangeServer.domain.service.response.ResponseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import result.MultipleResult;
-import result.SingleResult;
+import com.reviewPointMangeServer.domain.result.MultipleResult;
+import com.reviewPointMangeServer.domain.result.SingleResult;
 
 import javax.validation.Valid;
 

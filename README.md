@@ -85,7 +85,6 @@ Post
 <img src = "./img/login.png" width=45%>
 </p>
 
-> * JWT 토큰을 통한 회원가입과 로그인을 구현하였습니다.
 > * Response 값에 나와있는 access 토큰을 url에서 사용해주시면됩니다.
 
 <br/>

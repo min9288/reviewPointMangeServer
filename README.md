@@ -44,10 +44,10 @@
 - Spring Boot (API Server)
 - Spring Security (Security)
 - ~MySQL(8.0 / AWS_RDS) (RDB)~ - 과금 문제로 네이버 클라우드 DB로 변경
-- MySQL(8.0 / Naver Cloud DB) (RDB)
+- ~MySQL(8.0 / Naver Cloud DB) (RDB)~ - - 과금 문제로 종료
 - JPA (ORM)
 - ~AWS EC2 (Infra)~ - 과금 문제로 네이버 클라우드 서버로 변경
-- Naver Cloud Server (Infra)
+- ~Naver Cloud Server (Infra)~ - 과금 문제로 종료
 - AWS S3 (Store)
 - Postman(Documentation)
 - DBeaver (Database tool)
